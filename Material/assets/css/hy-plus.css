@@ -1,0 +1,54 @@
+.HYBtn {
+    border-radius: 8px;
+    font-size:12px;
+    line-height: 1.45;
+    padding-bottom: 3px;
+    padding-top: 3px;
+    width: 46px;
+}
+.HYBtn60 {
+    border-radius: 8px;
+    font-size:12px;
+    line-height: 1.45;
+    padding-bottom: 3px;
+    padding-top: 3px;
+    width: 60px;
+}
+.HYBtn80 {
+    border-radius: 8px;
+    font-size:12px;
+    line-height: 1.45;
+    padding-bottom: 3px;
+    padding-top: 3px;
+    width: 80px;
+}
+.HYBtn-RecTangle {
+	  border-radius: 8px;
+    font-size:14px;
+    line-height: 1.45;
+    padding-bottom: 7px;
+    padding-top: 8px;
+    width: 102px;
+	}
+.RadioMarginR15{
+	  margin-right:15px;
+	}
+	
+	
+/*  List Table */	
+#ListTable .CircleTR {
+	 background-color:#ffb752;
+}
+#ListTable td {
+   font-size:13px;	
+}
+#ListTable th{
+	      padding:0px;                         
+	}
+#AjaxFace select {
+	 color:#ff0000;
+    
+}
+.ui-jqdialog-titlebar {
+	 background-color:#ffb752;
+}

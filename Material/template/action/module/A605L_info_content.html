@@ -1,0 +1,186 @@
+<style>
+  #OrderTable th{
+  	 background-color:#87b87f;
+  	 color:#fff;
+  	 font-size:15px;
+  }
+
+</style>
+<br>
+<script  type="text/javascript">
+	 var goAjaxEventStatus = function(A68I03JJA67I02, A12I02UV0010,A31I02UV0010,A68D01) {			 	 	
+	 	
+        $('#chk'+A68I03JJA67I02+A12I02UV0010+A31I02UV0010+A68D01).kcwAjax(ThisWebUrl + '/action/Module/A605L/Arrival.ashx?Action=status&A73I02JJA67I02='+A68I03JJA67I02+'&A73I03JJA12I02='+A12I02UV0010+"&A73D01="+A68D01+"&A73I04JJA31I02="+A31I02UV0010,{
+                       	    Job:"LINK",
+                       	    Response: {
+	  	                      	         ToExecute: false,
+	  	                      	         ToGoal: false,
+	  	                      	         ToTrigger: false
+	  	                      },
+                       	    LocalEvents: {
+                       	    	success: function(Trigger,GoalTag,TriggerGoalTag,Response) {
+                      	    		          /*   alert(Response);  */
+                       	    		           if(Response=="OK"){
+                       	    		           	   $('.cnf'+A68I03JJA67I02+A12I02UV0010+A31I02UV0010+A68D01).remove();
+                       	    		           	   $('.err'+A68I03JJA67I02+A12I02UV0010+A31I02UV0010+A68D01).remove();
+                       	    		           	   $('.chk'+A68I03JJA67I02+A12I02UV0010+A31I02UV0010+A68D01).html("<div style='color:#d15b47;'>已到貨</div>");                       	    		           	   
+                       	    		           }else{
+                       	    		           	   $('.chk'+A68I03JJA67I02+A12I02UV0010+A31I02UV0010+A68D01).html("<div style='color:#eeeeee;'>未到貨</div>");
+                       	    		           	  
+                       	    		           }
+                                           
+                       	    		       }
+                       	      }
+                       	  }); 	
+      }
+</script>        
+<div class="">
+	 <div style="text-align:right;">  	 	
+	 	 
+	 </div>
+   <table id="OrderTable" style="font-size:13px;" class="table table-striped">	
+   	  <tr style="background-color:#ff0000;">
+   	  	 <th></th>
+   	  	 <th>出貨日</th>	
+   	  	 <th>供應商名稱</th>	
+         <th>承包商名稱</th>	      	         
+         <th>品項名稱</th>	      	
+         <th>數量</th>	      	
+         <th>狀態</th>	      	
+         <th>處置</th>	      	
+      </tr>
+   	  <!-- BEGIN List1 -->   
+      <tr >
+      	 <td>#{{serial}}</td>	      
+      	 <td>{{A68D01}}</td>	
+      	 <td>{{A12F01NV00641}}</td>
+         <td>{{A12F01NV0064}}</td>	      	
+         <td>{{A31F01NV0064}}</td>
+         <td>{{cnt}}</td>
+         <td>
+         	 <div id="chk{{A67I02UV0012}}{{A68I13JJA12I02}}{{A68I04JJA31I02}}{{A68D01_S}}" class="chk{{A67I02UV0012}}{{A68I13JJA12I02}}{{A68I04JJA31I02}}{{A68D01_S}}">待查詢</div>
+         	 <script  type="text/javascript">         	 	         	 	
+         	 	    goAjaxEventStatus("{{A67I02UV0012}}","{{A68I13JJA12I02}}","{{A68I04JJA31I02}}","{{A68D01_S}}");
+         	 </script>     
+         </td>	   
+         <td>          	           	           	  
+         	  <button id="arl{{A68I03JJA67I02}}" class="btn btn-info btn-xs ArrivalBtn" contractor="{{ContractorID}}"  A68D01="{{A68D01_S}}" A68I04JJA31I02="{{A68I04JJA31I02}}" A68I03JJA67I02="{{A68I03JJA67I02}}" A68I13JJA12I02="{{A68I13JJA12I02}}" onclick="" type="button">確認</button>
+	 	        <button id="cal{{A68I03JJA67I02}}" class="btn btn-warning btn-xs CancelBtn"  contractor="{{ContractorID}}" A68D01="{{A68D01_S}}" A68I04JJA31I02="{{A68I04JJA31I02}}" A68I03JJA67I02="{{A68I03JJA67I02}}" A68I13JJA12I02="{{A68I13JJA12I02}}" onclick="" type="button">取消</button>
+	 	        <button class="btn btn-danger btn-xs IncorrectBtn err{{A68I03JJA67I02}}{{A68I13JJA12I02}}{{A68D01_S}}" A68D01="{{A68D01_S}}" A68I04JJA31I02="{{A68I04JJA31I02}}" A68I03JJA67I02="{{A68I03JJA67I02}}" A68I13JJA12I02="{{A68I13JJA12I02}}" A12F01="{{A12F01NV0064}}" onclick="" type="button">數量異常</button>
+         </td>   	
+      </tr>
+      <!-- END List1 -->            
+   </table>
+</div>
+
+
+  
+ <script  type="text/javascript">
+ 	$( ".HideV" ).css("display","");
+  /* 接收 */
+  $(".ArrivalBtn").unbind();
+  $(".ArrivalBtn").click(function () { 
+   	    var Conrtractor = $(this).attr("contractor");     	   
+   	    var A68I03JJA67I02 = $(this).attr("A68I03JJA67I02"); 
+   	    var strDate =  $(this).attr("A68D01"); 
+   	    var strA12 =  $(this).attr("A68I13JJA12I02"); 
+   	    var strA31 =  $(this).attr("A68I04JJA31I02"); 
+   	    if(Conrtractor!=''&&Conrtractor!=undefined){   	       	    
+   	    	if(confirm(" 是否確認接收?"))
+          {   	    	                       	    	     	   	    	     	      	    	     	   
+   	    	         $("#AjaxDialog2").kcwAjax(ThisWebUrl +  '/action/Module/A605L/Arrival.ashx?A73I02JJA67I02='+A68I03JJA67I02+"&A73I03JJA12I02="+strA12+"&A73D01="+strDate+"&A73I04JJA31I02="+strA31,{
+                       	    Job:"LINK",
+                       	    Response: {
+	  	                      	         ToExecute: false,
+	  	                      	         ToGoal: false,
+	  	                      	         ToTrigger: false
+	  	                      },
+                       	    LocalEvents: {
+                       	    	success: function(Trigger,GoalTag,TriggerGoalTag,Response) {
+                       	    		           /* alert(Response);  */
+                       	    		           if(Response=="OK"){
+                       	    		           	                   	    		           	   
+                       	    		           }else{                       	    		           	
+                       	    		           	  if(Response=="exist"){                       	    		           	   
+                       	    		           	  }else{
+                       	    		           	     alert(Response);
+                       	    		           	  }
+                       	    		           }
+                                           
+                       	    		       }
+                       	      }
+                       	  }); 	              
+              ajaxTagFunction( ThisWebUrl +  '/action/Module/A605L/Info.ashx?A67I02UV0012='+A68I03JJA67I02,'AjaxDialog2',1,0); 
+              
+   	       }
+   	    }else{
+   	     	alert("請先選擇收貨承包商!!");
+   	    }
+   
+   });
+   
+  $(".CancelBtn").unbind();
+  $(".CancelBtn").click(function () { 
+   	    var Conrtractor = $(this).attr("contractor");     	   
+   	    var A68I03JJA67I02 = $(this).attr("A68I03JJA67I02"); 
+   	    var strDate =  $(this).attr("A68D01"); 
+   	    var strA12 =  $(this).attr("A68I13JJA12I02"); 
+   	    var strA31 =  $(this).attr("A68I04JJA31I02"); 
+   	    if(Conrtractor!=''&&Conrtractor!=undefined){   	       	    
+   	    	if(confirm(" 是否取消?"))
+          {   	    	                    
+   	    	         $("#AjaxDialog2").kcwAjax(ThisWebUrl +  '/action/Module/A605L/Arrival.ashx?Action=Del&A73I02JJA67I02='+A68I03JJA67I02+"&A73I03JJA12I02="+strA12+"&A73D01="+strDate+"&A73I04JJA31I02="+strA31,{
+                       	    Job:"LINK",
+                       	    Response: {
+	  	                      	         ToExecute: false,
+	  	                      	         ToGoal: false,
+	  	                      	         ToTrigger: false
+	  	                      },
+                       	    LocalEvents: {
+                       	    	success: function(Trigger,GoalTag,TriggerGoalTag,Response) {
+                       	    		           /* alert(Response);  */
+                       	    		           if(Response=="OK"){
+                       	    		           	  
+                       	    		           }else{
+                       	    		           	  alert(Response);
+                       	    		           }
+                                           
+                       	    		       }
+                       	      }
+                       	  }); 	              
+              ajaxTagFunction( ThisWebUrl +  '/action/Module/A605L/Info.ashx?A67I02UV0012='+A68I03JJA67I02,'AjaxDialog2',1,0); 
+              
+   	       }
+   	    }else{
+   	     	alert("請先選擇收貨承包商!!");
+   	    }
+   
+   });
+   /* 異常 */ 
+   $(".IncorrectBtn").click(function () {  
+   	                 var A68I03JJA67I02 = $(this).attr("A68I03JJA67I02");  
+   	                 var A12I02UV0010 = $(this).attr("A68I13JJA12I02");  
+   	                 var A68I04JJA31I02 = $(this).attr("A68I04JJA31I02"); 
+   	                 var A68D01 = $(this).attr("A68D01");    	                 
+   	                 if(A12I02UV0010!=''&&A12I02UV0010!=undefined){
+   	                      $( "#AjaxDialog3" ).html("");                  	                    	                	             	             	       
+             	            ajaxTagFunction(ThisWebUrl +  '/action/Module/A605L/incorrect.ashx?A74I02JJA67I02='+A68I03JJA67I02+"&A74I03JJA12I02="+A12I02UV0010+"&A74I04JJA31I02="+A68I04JJA31I02+"&A74D01="+A68D01,'AjaxDialog3',1,0);               	                    	                   	       
+             	            $( "#AjaxDialog3" ).dialog( "open" );                 	
+   	                 	   	                 	   	                 	   	                 	
+   	                 }   	   	   		       
+             });             
+             
+  // $(".cnf20141106L001B000000007").click();
+
+
+
+ 	
+  $("#OrderTable tr").dblclick(function () {    
+  	
+ 	 	         $("#OrderTable tr").removeClass( "CircleTR" );       
+    	       $(this).addClass( "CircleTR" );
+    });
+                                 
+      </script>        
+   
+  

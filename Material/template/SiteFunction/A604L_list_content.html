@@ -1,0 +1,66 @@
+<style>	 
+
+</style>
+
+  
+  
+  <div class="page-header">
+			<h4 class="pink">
+					<i class="icon-hand-right icon-animated-hand-pointer blue"></i>
+					<a href="#modal-table" role="button" class="green" data-toggle="modal"> 承包商到料查詢 </a>
+				</h4>
+  </div>
+   <div class="bs-example">   	   
+   	   <div id="AjaxList"></div>        	   	      
+   </div>
+   <div id="AjaxDialog" title="Basic dialog"></div>
+   
+   
+    <script  type="text/javascript">
+      
+      function LoadAjaxList(){
+        $("#AjaxList").Hy_Template_Engine({
+            TemplateType: "List",
+            PageNum: 15,         
+            TemplateUrl: ThisWebUrl +  "/template/templateEngine/A604L_list_content.html",
+            JsonDataUrl: ThisWebUrl +  "/action/templateEngine/A604L_list_content_list.ashx",
+            ColumeName_Input: "cnt,A31F01NV0064",
+            ColumeName_Radio: "",
+            ColumeName_Select: "A12I02UV0010",
+            ColumeName_Parame: "Language",
+            SearchColume: "SearchTxt,A12I02UV0010"
+        });    
+     }
+     LoadAjaxList();
+   </script>	  
+   
+    <script type="text/javascript">  	           	         	         
+             $("#AddBtn").click(function () {  
+             	       $( "#AjaxDialog" ).html("");                  	       
+             	       $("span.ui-dialog-title").text('新增作業');           	             	             	       
+             	       ajaxTagFunction(ThisWebUrl + '/Module/A30/face.ashx','AjaxDialog',1,0);               	                    	                   	       
+             	       $( "#AjaxDialog" ).dialog( "open" );                 
+             });             
+             
+             
+           $( "#AjaxDialog" ).dialog({
+           	  autoOpen: false,
+              resizable: false,
+              height: 400,
+      	      width: 470,
+              modal: false,
+              buttons: {
+                "送出": function() {
+                	  /* 表單驗証 */
+                    if(Hy_FormValidate()==true){                           	                      	             
+                        	             ajaxTagSubmit(ThisWebUrl + '/Module/A30/face.ashx',"AjaxFace",1);
+                        	             LoadAjaxList();
+                        	          }
+                },
+                "關閉": function() {
+                  $( this ).dialog( "close" );
+                }
+              }
+            });
+                                      
+      </script>        

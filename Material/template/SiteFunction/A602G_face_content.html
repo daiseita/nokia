@@ -1,0 +1,293 @@
+
+
+<script>
+  $(function () {
+    $('#myTab a:last').tab('show')
+    $('#XXX1').click();
+  })
+</script>
+<div class="HYclearfix" style="width:100%;">     
+  <div class="setCol_0" style="width:100%">     
+  	  <ul class="nav nav-tabs" role="tablist" id="myTab">
+        <li class="active"><a id="XXX1" href="#home" role="tab" data-toggle="tab">一般</a></li>
+        <li><a id="XXX2" href="#profile" role="tab" data-toggle="tab">序號件上傳</a></li>
+        <li><a id="XXX3" href="#profileN2" role="tab" data-toggle="tab">非序號上傳</a></li>
+      </ul>
+      
+      <div class="tab-content">
+        <div class="tab-pane active" id="home">
+        	<div class="HYclearfix" style="width:100%;min-height:370px;">
+        		 <div class="setCol_0" style="width:50%;">
+        		      <div id="CounterList"></div>
+        		 </div>
+        	   <div class="setRCol_0" style="width:50%;">
+        	      <table id="AjaxFace" style="width:100%;">
+               	<tr style="display:none;">
+               	    <th width="150"> <input type="text"  name="Action" id="Action"   value="{{Action}}" >{{A30I01XA.HTML_HIDDEN}}	</th>
+               	    <td 	colspan="3"></td>
+               	</tr>
+               	<tr>
+                 	<th width="150">選擇品項</th>        	
+                 	<td colspan="3">          		 
+                 		    <select class="width-80 chosen-select MaterialTxt" id="form-field-select-3" data-placeholder="" name="MaterialTxt" >
+			         					  {{option}}									  
+			         				 	</select>        		 						         		 
+                   </td>
+                 </tr>
+                 <tr>
+                 	<th width="150">每箱數量</th>
+                   <td colspan="3"> 
+                   	  <input type="text" style="width:60px;" class="NumTxt" name="NumTxt"> 
+                   	  <button id="AddChBtn" class="btn btn-xs btn-info" style="font-size:13px;margin-left:10px;"  type="button">加入</button>  
+                   	  <button id="DelChBtn" class="btn btn-xs btn-danger" style="font-size:13px;margin-left:10px;"  type="button">清空</button>               	      
+                   </td>
+                 </tr>
+                 <tr>
+                 	<th width="100">入料資料</th>
+                 	<td id="ShowBox" colspan="3">        		          		       
+                   </td>
+                 </tr>    
+                 <tr>
+                  <th width="100">Packing #</th>
+                 	<td id="">        	
+                 	     <input type="text" id="A66I20CV0020" style="" class="A66I20CV0020" name="A66I20CV0020">
+                  </td>
+                  <th width="100">sku</th>
+                 	<td id="">        	
+                 	      {{A63F08CV0064.HTML_TEXT}}
+                  </td> 
+                 </tr>     
+                 <tr>                 
+                  <th width="100">Description on System</th>
+                 	<td id="">        	
+                 	     {{A63F09CV0128.HTML_TEXT}}
+                  </td>
+                  <th width="100">Item NO.</th>
+                 	<td id="">        	
+                 	    {{A63I10CV0032.HTML_TEXT}}
+                  </td>
+                 </tr>  
+                 <tr>
+                  <th width="100">Q'TY</th>
+                 	<td id="">        	
+                 	     {{A63I11CV0032.HTML_TEXT}}
+                   </td>
+                   <th width="100">SO#</th>
+                 	<td id="">        	
+                 	     {{A63I13CV0032.HTML_TEXT}}
+                   </td>
+                 </tr>     
+                 <tr>                  
+                  <th width="100">排序</th>
+                 	<td id="">        	
+                 	     {{A63I14CV0032.HTML_TEXT}}
+                  </td>
+                  <th width="100">CASE NO.</th>
+                 	<td id="">        	
+                 	     {{A63I15CV0032.HTML_TEXT}}
+                   </td>
+                 </tr>     
+                 
+                  
+                 <tr>        
+                  <th width="100">N/PK</th>
+                 	<td id="" colspan="3">        	
+                 	     {{A63I16CV0032.HTML_TEXT}}
+                   </td>
+                  
+                 </tr>      
+                 <tr>
+                 <th width="100">供應商</th>
+                 	<td id="" colspan="3">        	
+                 	      {{A66I12JJA12I02.HTML_SELECT}}
+                   </td>
+                 </tr>     
+                 <tr>
+                 	<th width="100">入料貨倉</th>
+                 	<td id="" >        	
+                 	      {{A61I05JJA19I02.HTML_SELECT}}
+                   </td>
+                   <th width="100">入料日期</th>
+                 	<td id=""  >        	
+                 	      {{A66D01.HTML_TEXT}}
+                   </td>
+                 </tr>                   
+                 
+                 <tr>
+                 	<th width="100">備註</th>
+                 	<td id=""  colspan="3">        	
+                 	      {{A60F02NV0128.HTML_TEXTAREA}}	          		       
+                   </td>
+                 </tr>   
+                 <tr >
+                 	    <th width="100"></th>   
+                 	    <td id=""  colspan="3">     
+                        	<input type="text" id="OrderDataString" style="display:none;" class="OrderDataString" name="OrderDataString">
+                        	<input type="text" id="SerialDataString" style="display:none;" class="SerialDataString" name="SerialDataString">
+                      </td> 
+                 </tr>     
+               </table>    
+               <div id="RtnMsg" style="width:400px;text-align:center;"></div>       
+               <div id="HtmlBox" style="display:none;">
+               	  <div class="label label-lg label-primary  HYclearfix OrderItem It{{cls}}" pData="{{pId}}" pSerial="{{Serial}}"  title="{{pProviderTag}}" style="margin-bottom:5px;width:95%;">
+                      <span class="ItName" style="float:left">{{NameTag}}</span>                	                  
+                    	<i class="icon-trash icon-on-right BtnMa"  style="margin-left:20px;cursor:pointer;float:right"></i>
+                    	<span class="ItNum Cls{{Sum}}" style="float:right">數量x <span class="NumBox">{{NumTag}}</span></span>
+                    	<span class="ItHouse" style="float:right;margin-right:5px;">[  {{DateTag}} {{HouseTag}}]</span>                	
+                    	<span class="ItPack" style="float:right;margin-right:5px;font-size:9px;">#{{PackTag}}</span>                     	
+                   </div>      
+               </div>        
+             </div>  
+          </div>   
+        </div>
+        <div class="tab-pane" id="profile" style="min-height:360px;">
+        	 
+        	<iframe id="UploadFrameSerial" src="" style="min-height:420px;width:480px;overflow:hidden;"></iframe>
+        </div>
+        <div class="tab-pane" id="profileN2" style="min-height:360px;">
+        	 
+        	<iframe id="UploadFrameNonSerial" src="" style="min-height:420px;width:480px;overflow:hidden;"></iframe>
+        </div>
+      </div>
+  	
+  		
+      
+  </div>  
+                 
+</div>  
+      <script type="text/javascript">           
+      	      $('#A66D01').datepicker({
+      	         format: "yyyymmdd",
+      	        todayHighlight: true
+      	     });           	     
+      	     $("#A66D01").focus(function(){
+                      $('.datepicker').css('z-index','99999');
+             });
+      	  
+      	     
+      	     function LoaOrderList(){
+      	     	 var pHtml ='<div style="width:100%;text-align:center;padding-top:80px;">' +
+                        '<img src="'+ThisWebUrl+'/assets/images/loadering.gif" alt="Smiley face" height="120" width="120">' +
+                        '<div style="font-size:16px;">系統處理中....請稍候!!</div>' +
+                        '</div>';
+    	       $( "#CounterList" ).html(pHtml);     
+      	       ajaxTagFunction(ThisWebUrl + '/action/Module/A602G/CountList.ashx','CounterList',1,0);               
+      	     }
+      	     
+      	     LoaOrderList();
+      	     $("#UploadFrameSerial").attr("src",ThisWebUrl+"/action/upload/global/upload2.aspx?type=A");
+      	     $("#UploadFrameNonSerial").attr("src",ThisWebUrl+"/action/upload/global/upload2.aspx?type=B");
+      	     
+      	     
+      	     $(".UploadSort").change(function() {      	  
+      	     	       $("#UploadFrame").attr("src","");   	
+                     $("#UploadFrame").attr("src",ThisWebUrl+"/action/upload/global/upload.aspx?type=" + this.value);
+              });
+      	     
+      	     $(".A60F02NV0128").width("460");
+      	     $(".chosen-select").chosen(); 
+				     $('#chosen-multiple-style').on('click', function(e){
+				     	  var target = $(e.target).find('input[type=radio]');
+				     	  var which = parseInt(target.val());
+				     	  if(which == 2) $('#form-field-select-4').addClass('tag-input-style');
+				     	   else $('#form-field-select-4').removeClass('tag-input-style');
+				     });              
+      	
+ 	           $(".BtnMa").click(function() {      	     	
+                    $(this).parent().remove();
+              });
+             $("#AddChBtn").click(function() {      
+             	 if(Hy_FormValidate()==true){ 	     	
+                     var pName = $(".chosen-single span").html();                
+                     var pNum =$(".NumTxt").val();                     
+                     var pHtml = $("#HtmlBox").html();
+                     var pHouse =$("#A61I05JJA19I02").val();
+                     var pHouseName =$("#A61I05JJA19I02  :selected").text();                     
+                     var pProvider =$("#A66I12JJA12I02").val();
+                     var pProviderName =$("#A66I12JJA12I02  :selected").text();  
+                     var pPack =$("#A66I20CV0020").val();
+                     var pDate =$(".A66D01").val();     
+                     var A63F08CV0064 =$("#A63F08CV0064").val();
+                     var A63F09CV0128 =$("#A63F09CV0128").val();
+                     var A63I10CV0032 =$("#A63I10CV0032").val();
+                     var A63I11CV0032 =$("#A63I11CV0032").val();
+                     var A63I13CV0032 =$("#A63I13CV0032").val();
+                     var A63I14CV0032 =$("#A63I14CV0032").val();
+                     var A63I15CV0032 =$("#A63I15CV0032").val();
+                     var A63I16CV0032 =$("#A63I16CV0032").val();                     
+                     var Serial = A63F08CV0064 +"and"+ A63F09CV0128 +"and"+A63I10CV0032 +"and"+A63I11CV0032 +"and"+pPack +"and"+A63I13CV0032 +"and"+A63I14CV0032 +"and"+A63I15CV0032 +"and"+A63I16CV0032;
+                      
+                     pHtml = pHtml.replace("{{NameTag}}",pName);
+                     pHtml = pHtml.replace("{{NumTag}}",pNum);
+                     pHtml = pHtml.replace("{{HouseTag}}",pHouseName);
+                     pHtml = pHtml.replace("{{pProviderTag}}",pProviderName);
+                     pHtml = pHtml.replace("{{PackTag}}",pPack);
+                     pHtml = pHtml.replace("{{Serial}}",Serial);
+                     pHtml = pHtml.replace("{{DateTag}}",pDate);
+                     var pCl = pName;                     
+                     pCl=pCl.replace(/\(/g,'');pCl=pCl.replace(/\)/g,'');pCl=pCl.replace(/\'/g,'');pCl=pCl.replace(/\_/g,'');pCl=pCl.replace(/\ /g,'');pCl=pCl.replace(/\./g,'');pCl=pCl.replace(/\=/g,'');
+                     var pId = $("."+pCl).attr("value")+pHouse +pProvider+pPack+pDate;                     
+                     var pData = pId + "@" + pNum+ "@" +pHouse+"@"+pPack+"@"+pDate;                     
+                     var pSumID =$("."+pCl).attr("value");
+                     if($(".It" +pId).html()!='' && $(".It" +pId).html()!=undefined){
+                     	   var NewNum = $(".It" +pId+" .NumBox").html();                     	   
+                     	   NewNum = parseInt(NewNum) + parseInt(pNum);
+                     	   var pCount = 0;
+                     	   $( ".Cls"+pSumID +" .NumBox").each(function( index ) {    
+                     	   	        var oNum =$(this).html();                     	   	        
+                     	   	        pCount += parseInt(oNum);                     	   	
+                     	    });
+                     	   pCount += parseInt(pNum);
+                     	   var UndevCode = pId.substring(0,10);	  
+                     	   if($(".Undev"+UndevCode).val()==''||$(".Undev"+UndevCode).val()==undefined){
+                    	      alert('查無訂單資料');	
+                    	       return;
+                    	    }                      	   
+                     	   if(parseInt(pCount) > parseInt($(".Undev"+UndevCode).val())){
+                     	   	   alert('輸入數量大於目前訂單總數量!!');                     	   	   
+                     	   }else{                     	     
+                     	     $(".It" +pId+" .NumBox").html(NewNum);
+                     	     $(".It" +pId).attr("pData",pId+"-"+NewNum);
+                     	   }                     	   
+                     }else{         
+                     	    var pCount = 0;
+                     	   $( ".Cls"+pSumID +" .NumBox").each(function( index ) {    
+                     	   	        var oNum =$(this).html();                     	   	        
+                     	   	        pCount += parseInt(oNum);                     	   	
+                     	    });
+                     	   pCount += parseInt(pNum);
+                     	   
+                     	   var UndevCode = pId.substring(0,10);	    
+                     	   if($(".Undev"+UndevCode).val()==''||$(".Undev"+UndevCode).val()==undefined){
+                    	      alert('查無訂單資料');	
+                    	       return;
+                    	    }   
+                     	   if(parseInt(pCount) > parseInt($(".Undev"+UndevCode).val())){
+                     	   	   alert('輸入數量大於目前訂單總數量!!');                     	   	   
+                     	   }else{            
+                            pHtml = pHtml.replace(/\{{cls}}/g,pId);                                                                      
+                            pHtml = pHtml.replace("{{pId}}",pData);                                          
+                            pHtml = pHtml.replace("{{Sum}}",pSumID); 
+                            $("#ShowBox").append(pHtml);                                                                                
+                            $(".BtnMa").unbind(); 
+                            $(".BtnMa").click(function() {      	     	
+                               $(this).parent().remove();
+                            });
+                         }
+                     }
+                      $("#RtnMsg").html('');
+                 }
+             }); 
+               $("#DelChBtn").click(function() {  
+               	   $("#ShowBox").html("");  
+              });   	
+             
+             $("#AjaxFace").Hy_Validate({
+                  	  id:"#AjaxFace",
+                     Column_Require:"NumTxt,A61I13JJA12I02,A61I05JJA19I02,A66I12JJA12I02,A66I20CV0020,A63F08CV0064,A63F09CV0128,A63I10CV0032,A63I11CV0032,A63I13CV0032,A63I14CV0032,A63I15CV0032,A63I16CV0032,A66D01",
+                     Column_Numeric:"NumTxt"
+            });  
+            
+            
+      </script>        
+

@@ -1,0 +1,55 @@
+<style>	 
+
+</style>
+<div class="widget-box">
+	<div class="widget-header">
+		<h4>功能鍵</h4>		
+		<button id="ExportBtn" class="btn-success HYBtn hidden-480 ExportBtn" type="button" ><i class="icon-cloud  icon-only"></i><br>匯出</button>		
+		
+	</div> 
+</div>
+  
+  
+  <div class="page-header">
+			<h4 class="pink">
+					<i class="icon-hand-right icon-animated-hand-pointer blue"></i>
+					<a href="#modal-table" role="button" class="green" data-toggle="modal"> 物料統計表 </a>
+				</h4>
+  </div>
+   <div class="bs-example">   	   
+   	   <div id="AjaxList"></div>        	   	      
+   </div>
+   <div id="AjaxDialog" title="Basic dialog"></div>
+   
+   <iframe id="ExcelData" src="" style="display:none;"></iframe>   
+   
+    <script  type="text/javascript">
+    	var ThisHtml="";
+    	
+      ajaxTagFunction(ThisWebUrl + '/Action/Module/A611L/Info.ashx?A61I07CV0001=G','AjaxList',1,0);   
+      
+      
+      function setHtmlTable() {
+           ThisHtml = $( "#ReportTable" ).html();
+           ThisHtml = ThisHtml.replace("tbody","table");
+           ThisHtml = ThisHtml.replace("tbody","table");
+          
+        }              
+      function goExport(strName) {
+      	   
+      	   $("#ExcelData").attr("src",ThisWebUrl+"/action/report/HtmltoExcel.ashx?filename="+strName);    	
+      }
+      $("#ExportBtn").click(function () {    
+      	    setHtmlTable();
+      	    $("#iHTML").val(ThisHtml);
+  	        //$("#ExcelData").attr("src",ThisWebUrl+"/action/report/HtmltoExcel.ashx?ThisHtml="+ThisHtml);    	                        	                       	                
+ 	 	        
+ 	 	        
+ 	 	        ajaxTagSubmit(ThisWebUrl +  '/action/report/SaveHtml.ashx',"AjaxFace",1); 
+ 	 	        
+ 	 	        
+       });
+     
+   </script>	  
+   
+    

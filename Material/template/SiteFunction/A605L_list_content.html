@@ -1,0 +1,79 @@
+<style>	 
+
+</style>
+
+  <div class="widget-box">
+	<div class="widget-header">
+		<h4>功能鍵</h4>		
+		<button class="btn-success HYBtn hidden-480 InfoBtn" type="button" ><i class="icon-cloud  icon-only"></i><br>內容</button>		
+		
+	</div>
+
+ 
+</div>
+  
+  <div class="page-header">
+			<h4 class="pink">
+					<i class="icon-hand-right icon-animated-hand-pointer blue"></i>
+					<a href="#modal-table" role="button" class="green" data-toggle="modal"> 承包商到貨記錄 </a>
+				</h4>
+  </div>
+   <div class="bs-example">   	   
+   	   <div id="AjaxList"></div>        	   	      
+   </div>
+   <div id="AjaxDialog" title="Basic dialog"></div>
+   <div id="AjaxDialog2" title="到貨明細"></div>
+   <div id="AjaxDialog3" title="數量異常"></div>
+   <div id="TagID"></div>
+   
+   
+    <script  type="text/javascript">
+      
+      function LoadAjaxList(){
+        $("#AjaxList").Hy_Template_Engine({
+            TemplateType: "List",
+            PageNum: 10,         
+            TemplateUrl: ThisWebUrl +  "/template/templateEngine/A605L_list_content.html",
+            JsonDataUrl: ThisWebUrl +  "/action/templateEngine/A605L_list_content_list.ashx",
+            ColumeName_Input: "A68I03JJA67I02,A68I13JJA12I02,A68INA",
+            ColumeName_Radio: "",
+            ColumeName_Select: "A12I02UV0010",
+            ColumeName_Parame: "Language",
+            SearchColume: "SearchTxt,A12I02UV0010"
+        });    
+     }
+     LoadAjaxList();
+   </script>	  
+   
+    <script type="text/javascript">  	           	         	         
+             $( "#AjaxDialog2" ).dialog({
+           	  autoOpen: false,
+              resizable: false,
+              height: 600,
+      	      width: 930,
+              modal: false,
+              buttons: {                
+                "關閉": function() {
+                  $( this ).dialog( "close" );
+                }
+              }
+            });
+             $( "#AjaxDialog3" ).dialog({
+           	  autoOpen: false,
+              resizable: false,
+              height: 400,
+      	      width: 600,
+              modal: false,
+              buttons: {           
+                "送出": function() {
+                	  /* 表單驗証 */
+                    if(Hy_FormValidate()==true){                           	                      	             
+                        	             ajaxTagSubmit(ThisWebUrl +  '/action/Module/A605L/incorrect.ashx',"AjaxFace",1);                        	             
+                        	          }
+                },     
+                "關閉": function() {
+                  $( this ).dialog( "close" );
+                }
+              }
+            });                          
+      </script>        

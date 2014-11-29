@@ -1,0 +1,33 @@
+       
+      <table id="AjaxFace" style="width:100%;">
+      	<tr style="display:none;">
+      	    <th width="100"> 
+      	    	<input type="text"  name="Action" id="Action"   value="{{Action}}" >
+      	   	</th>
+      	    <td>{{A74I01XA.HTML_HIDDEN}}{{A74I02JJA67I02.HTML_HIDDEN}}{{A74I03JJA12I02.HTML_HIDDEN}}{{A74I04JJA31I02.HTML_HIDDEN}}{{A74D01.HTML_HIDDEN}}</td>
+      	</tr>      	
+        <tr>
+        	<th width="200">異常數量  <div style="color:#d15b47;font-size:12px;"> 範例: 10 或 -10<div></th>
+          <td>{{A74F01FD0400.HTML_TEXT}}   <span class="MarkStar">*</span> </td>
+        </tr>        
+         <tr>
+        	<th width="200">說明 <div style="color:#d15b47;font-size:12px;">  (請將序號/相關資料輸入)<div></th>
+        	<td>{{A74F02NT.HTML_TEXTAREA}} </td>
+        </tr>       
+      </table>    
+      <div id="RtnMsg" style="width:400px;text-align:center;"></div>       
+      <script type="text/javascript">        
+ 	           
+             $(".A74F01FD0400").width("60");               
+             $(".A74F02NT").width("300").height("150");               
+             
+             
+             if('{{Action}}'=='Add'){
+                 // $(".E01F01NV0256").attr("tittle","請輸入中文");
+                 // $(".A30I02UV0064").attr("tittle","請輸入英文,數字");
+             }
+             $("#AjaxFace").Hy_Validate({
+                  	  id:"#AjaxFace",
+                     Column_Require:"A74F01FD0400"
+            });  
+      </script>        

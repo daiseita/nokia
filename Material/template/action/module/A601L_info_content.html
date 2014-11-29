@@ -1,0 +1,103 @@
+<style>
+  #OrderTable th{
+  	 background-color:#87b87f;
+  	 color:#fff;
+  	 font-size:15px;
+  }
+</style>
+<br>
+<div class="">
+   <table id="OrderTable" style="font-size:13px;" class="table table-striped">	
+   	  <tr style="background-color:#ff0000;">
+   	  	 <th></th>
+   	  	 <th>預計進貨日</th>	
+         <th>品項名稱</th>	      	                               	
+         <th>總數量</th>	  
+         <th></th>    	
+      </tr>
+   	  <!-- BEGIN List1 -->   
+      <tr>
+      	 <td>#{{serial}}</td>	      	
+      	 <td>
+      	 	  <span id="SpanDate{{A61D01_S}}{{A61I04JJA31I02}}">{{A61D01}}</span>
+      	 	  <input id="InputDate{{A61D01_S}}{{A61I04JJA31I02}}" class="Date{{A61D01_S}}{{A61I04JJA31I02}} DateInput" type="text" value="{{A61D01_S}}" style="width:80px;display:none;">
+      	 </td>	   
+         <td>{{A31F01NV0064}}</td>	      	         
+         <td>
+         	  <span id="SpanID{{A61D01_S}}{{A61I04JJA31I02}}" class="Span{{A61D01_S}}{{A61I04JJA31I02}} clsSpan" > {{Total}} </span>
+         	  <input id="InputID{{A61D01_S}}{{A61I04JJA31I02}}" class="Input{{A61D01_S}}{{A61I04JJA31I02}} clsInput" type="text" value="{{Total}}" style="width:40px;display:none;">
+         </td>	      	
+         <td>
+         	   <button class="btn btn-info btn-xs ReUpdBtn" A60I02UV0012="{{A60I02UV0012}}"   A61D01="{{A61D01_S}}"  A61I04JJA31I02="{{A61I04JJA31I02}}"  onclick="" type="button">修改</button>
+	 	         <button id="Send{{A60I02UV0012}}{{A61I04JJA31I02}}" style="display:none;"  class="btn btn-warning btn-xs SendBtn Btn{{A61D01_S}}{{A61I04JJA31I02}}"  A60I02UV0012="{{A60I02UV0012}}" A61D01="{{A61D01_S}}" A61I04JJA31I02="{{A61I04JJA31I02}}"  onclick="" type="button">送出</button>
+         </td>	 
+      </tr>
+      <!-- END List1 -->            
+   </table>
+</div>
+<div id="AjaxTagID2"></div>
+     
+   <script  type="text/javascript">
+      
+       $(".ReUpdBtn").click(function () {  
+             	       var A61I04JJA31I02 = $(this).attr("A61I04JJA31I02");   	 
+             	       var A61D01 = $(this).attr("A61D01");   	 
+             	       if($('.Input'+A61D01+A61I04JJA31I02).css('display')=="none"){
+             	          $('.Input'+A61D01+A61I04JJA31I02).css("display","");
+             	          $('.Date'+A61D01+A61I04JJA31I02).css("display","");
+             	          $('.Btn'+A61D01+A61I04JJA31I02).css("display","");
+             	          $('.Span'+A61D01+A61I04JJA31I02).css("display","none");
+             	      }else{
+             	      	  $('.Span'+A61D01+A61I04JJA31I02).css("display","");
+             	      	  $('.Btn'+A61D01+A61I04JJA31I02).css("display","none");
+             	          $('.Input'+A61D01+A61I04JJA31I02).css("display","none");
+             	          $('.Date'+A61D01+A61I04JJA31I02).css("display","none");
+             	      }
+             	       
+             });    
+             
+       $(".SendBtn").click(function () {  
+       	     var A60I02UV0012 = $(this).attr("A60I02UV0012");   	 
+        	   var A61I04JJA31I02 = $(this).attr("A61I04JJA31I02");   	 
+             var A61D01 = $(this).attr("A61D01");   	
+             var Num =  $(".Input"+A61D01+A61I04JJA31I02).val();
+             var NewDate = $(".Date"+A61D01+A61I04JJA31I02).val();
+             
+             if($.isNumeric(Num)==true && NewDate.length == 8)
+             {
+             $('#AjaxTagID2').kcwAjax(ThisWebUrl + '/action/Module/A601L/ReUpd.ashx?A61I03JJA60I02='+A60I02UV0012+'&A61I04JJA31I02='+A61I04JJA31I02+'&A61D01='+A61D01+"&Num="+Num+"&NewDate="+NewDate,{
+                       	    Job:"LINK",
+                       	    Response: {
+	  	                      	         ToExecute: true,
+	  	                      	         ToGoal: false,
+	  	                      	         ToTrigger: false
+	  	                      },
+                       	    LocalEvents: {
+                       	    	success: function(Trigger,GoalTag,TriggerGoalTag,Response) {
+                      	    		         /*   alert(Response);  */
+                      	    		         
+                                           
+                       	    		       }
+                       	      }
+                       	  }); 
+              }else{
+              	 $(this).attr("A61D01",A61D01);
+                 alert("請檢查輸入!");	                 
+              }	
+        	
+        });      
+      $(".clsInput").change(function () {  
+      	   var thisID = this.id;
+      	   thisID = thisID.replace('Input','Span');      	   
+      	   $("#"+thisID).html(this.value);      	   
+      	   
+      });              
+      $(".DateInput").change(function () {  
+      	   var thisID = this.id;
+      	   thisID = thisID.replace('Input','Span');          	     	   
+      	   $("#"+thisID).html(this.value);      	   
+      	   
+      });      
+   </script>	  
+   
+  

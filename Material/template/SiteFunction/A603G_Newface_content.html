@@ -1,0 +1,113 @@
+
+
+<script>
+  $(function () {
+    $('#myTab a:last').tab('show')
+    $('#XXX1').click();
+  })
+</script>
+<div class="HYclearfix" style="width:100%;">   
+  <div class="setCol_0" style="width:50%">
+      <table id="AjaxFace" style="width:100%;">
+      	<tr style="display:none;">
+      	    <th width="100"> <input type="text"  name="Action" id="Action"   value="{{Action}}" >{{A30I01XA.HTML_HIDDEN}}	</th><td colspan="3"></td>
+      	</tr>
+      	<tr class="">
+           	<th width="100">承包商</th>
+           	<td id="">        	
+           	      {{A66I13JJA12I02.HTML_SELECT}}
+             </td>
+            <th width="100">出貨日</th>
+           	<td id="">        	
+           	     <input type="text" id="A66D01" name="A66D01" class="A66D01">
+             </td>
+        </tr>      
+      	<tr class="">
+           	<th width="100">PO Number</th>
+           	<td id="">        	
+           	      {{PONUM.HTML_SELECT}}
+             </td>
+            <th width="100">品項</th>
+           	<td id="">        	
+           	      {{ITEM.HTML_SELECT}}
+             </td>
+        </tr>              
+         <tr class="">           
+            <th width="100">Case Number</th>
+           	<td id="" >        	
+           	      {{CASENUM.HTML_SELECT}}
+             </td>
+            <th width="100"></th>
+           	<td id="" >        	
+           	      <div id="RtnMsg" style=""></div>      
+             </td>  
+        </tr>         
+        <tr class="HiddenA61I05">
+           	<th width="100">Packing Number</th>
+           	<td id="PackingList"  colspan="3">        	
+           	      
+            </td>
+        </tr>             
+      	
+        
+        <tr ><th width="100"></th>   <td id="">     <input type="text" id="PackNumString" class="PackNumString" name="PackNumString" style="display:none;" ></td> </tr>    
+      </table>    
+      
+                          
+       
+  </div>
+  <div class="setRCol_0" style="width:50%">     
+  	  <div style="width:90%;height:490px;background-color:#eee;" >
+  	     <div style="width:100%;height:35px;background-color:#fff;">
+  	     	 <span>請將左方選單內容加入</span>
+  	       <button id="AllClsBtn" class="btn btn-xs btn-danger" style="font-size:13px;margin:0px 20px 0px 10px"  type="button">清空選取項目</button>   
+  	       已加入箱數 x  <span id="BoxCountTag" style="color:#d15b47;font-size:15px;">0</span>
+         </div>	
+  	  	 <div id="TakenBox" class="HYclearfix" style="width:100%;height:450px;overflow-y:auto;">
+  	  	 	  
+
+  	  	 </div>
+  	  </div>
+      
+  		
+      
+  </div>  
+                 
+</div>  
+      <script type="text/javascript">           
+      	  $('#A66D01').datepicker({
+      	         format: "yyyymmdd",
+      	        todayHighlight: true
+      	     });           	     
+      	     $("#A66D01").focus(function(){
+      	     	
+                      $('.datepicker').css('z-index','99999');
+             });
+      	  
+      	 $( "#CASENUM" ).change(function() {            	
+            	  var A63I15CV0032 = this.value;
+            	  ajaxTagFunction(ThisWebUrl + '/Action/Module/A603G/CheckPackingList.ashx?A63I15CV0032='+A63I15CV0032,'PackingList',1,0);              
+            	  
+            });
+         $( "#PONUM" ).change(function() {        
+         	     $("#PackingList" ).html("");
+         	 });
+      	
+      	 $( "#AllClsBtn" ).click(function() {            	
+            	      $( "#TakenBox" ).html("");      
+            	      $("#PackNumString").val("");   
+            	      BoxCount();   	  
+            });
+      	    
+      	
+            var oSelect = new hy_SelectHtml();
+            var pUrl = ThisWebUrl + "/action/select/A603G/PONUM.ashx";
+             //oSelect.setBaicWhere("E31I07CV0001","");             
+             oSelect.initEvent("PONUM","ITEM","A60" ,"A31I02UV0010","A31F01NV0064","A61I05JJA19I02","",pUrl);
+            
+            var oSelect2 = new hy_SelectHtml();
+            var pUrl2 = ThisWebUrl + "/action/select/A603G/ITEM.ashx";
+             
+             oSelect2.PlusParame1("PONUM");            
+             oSelect2.initEvent("ITEM","CASENUM","A60" ,"A31I02UV0010","A31F01NV0064","A61I05JJA19I02","",pUrl2); 
+      </script>        

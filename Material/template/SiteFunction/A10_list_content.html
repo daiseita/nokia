@@ -1,0 +1,76 @@
+<style>	 
+
+</style>
+<div class="widget-box">
+	<div class="widget-header">
+		<h4>功能鍵</h4>
+		<button id="AddBtn" class="btn-info HYBtn hidden-480" type="button"><i class="icon-book  icon-only"></i><br>新增</button>
+		<button class="btn-warning HYBtn hidden-480 UpdBtn" type="button"><i class="icon-edit icon-only"></i><br>編輯</button>
+		<button class="btn-danger HYBtn hidden-480 DelBtn" type="button"><i class="icon-trash  icon-only"></i><br>刪除</button>
+		<button class="btn-success HYBtn hidden-480" type="button" style="display:none;"><i class="icon-cloud  icon-only"></i><br>上傳</button>		
+	</div>
+
+ 
+</div>
+  
+  
+  <div class="page-header">
+			<h4 class="pink">
+					<i class="icon-hand-right icon-animated-hand-pointer blue"></i>
+					<a href="#modal-table" role="button" class="green" data-toggle="modal"> 帳號管理 </a>
+				</h4>
+  </div>
+   <div class="bs-example">   	   
+   	   <div id="AjaxList"></div>        	   	      
+   </div>
+   <div id="AjaxDialog" title="Basic dialog"></div>
+   
+   
+    <script  type="text/javascript">
+      
+      function LoadAjaxList(){
+        $("#AjaxList").Hy_Template_Engine({
+            TemplateType: "List",
+            PageNum: 15,         
+            TemplateUrl: ThisWebUrl +  "/template/templateEngine/A10_list_content.html",
+            JsonDataUrl: ThisWebUrl +  "/action/templateEngine/A10_list_content_list.ashx",
+            ColumeName_Input: "A10I01XA,A10I02UV0064,A10I03JJA20I02,A10I04CV0001,A10F01CV0032,A10F02NV0032,A10F03CV0015,A10A01,A10IND,A10INT,A10INA,A10INU,A10UPD,A10UPT,A10UPA,A10UPU,A10UPC,A10I04CV0001_NAME",
+            ColumeName_Radio: "",
+            ColumeName_Select: "",
+            ColumeName_Parame: "Language",
+            SearchColume: "SearchTxt"
+        });    
+     }
+     LoadAjaxList();
+   </script>	  
+   
+    <script type="text/javascript">  	           	         	         
+             $("#AddBtn").click(function () {  
+             	       $( "#AjaxDialog" ).html("");                  	       
+             	       $("span.ui-dialog-title").text('新增作業');           	             	             	       
+             	       ajaxTagFunction(ThisWebUrl + '/Module/A10/face.ashx','AjaxDialog',1,0);               	                    	                   	       
+             	       $( "#AjaxDialog" ).dialog( "open" );                 
+             });             
+             
+             
+           $( "#AjaxDialog" ).dialog({
+           	  autoOpen: false,
+              resizable: false,
+              height: 400,
+      	      width: 520,
+              modal: false,
+              buttons: {
+                "送出": function() {
+                	  /* 表單驗証 */
+                    if(Hy_FormValidate()==true){                           	                      	             
+                        	             ajaxTagSubmit(ThisWebUrl + '/Module/A10/face.ashx',"AjaxFace",1);
+                        	             LoadAjaxList();
+                        	          }
+                },
+                "關閉": function() {
+                  $( this ).dialog( "close" );
+                }
+              }
+            });
+                                      
+      </script>        

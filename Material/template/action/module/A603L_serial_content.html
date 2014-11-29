@@ -1,0 +1,49 @@
+<style>
+  #OrderTable th{
+  	 background-color:#87b87f;
+  	 color:#fff;
+  	 font-size:15px;
+  }
+
+</style>
+<br>
+<div class="">
+	 <div>	 	
+	   <button id="arl{{A68I03JJA67I02}}" class="btn btn-info btn-xs ImportBtn" A68I13JJA12I02="{{A68I13JJA12I02}}"  A68I04JJA31I02="{{A68I04JJA31I02}}" A68I03JJA67I02="{{A68I03JJA67I02}}"  onclick="" type="button">匯入序號</button>	
+	 </div>
+   <table id="OrderTable" style="font-size:13px;" class="table table-striped">	
+   	  <tr style="background-color:#ff0000;">
+   	  	 <th></th>
+         <th>序號</th>	      	                  
+         <th></th>	    	
+      </tr>
+   	  <!-- BEGIN List1 -->   
+      <tr>
+      	 <td>#{{serial}}</td>	      	
+         <td>{{A63I03CV0032}}</td>	      	                  	 
+         <td></td>    	
+      </tr>
+      <!-- END List1 -->            
+   </table>
+</div>
+
+ <script  type="text/javascript">
+$(".ImportBtn").click(function () {            
+	           var pHtml ='<div style="width:100%;text-align:center;padding-top:80px;">' +
+                        '<img src="'+ThisWebUrl+'/assets/images/loadering.gif" alt="Smiley face" height="120" width="120">' +
+                        '<div style="font-size:16px;">系統處理中....請稍候!!</div>' +
+                        '</div>';
+    	       $( "#AjaxDialog5" ).html(pHtml);                    	      	                         
+    	       var A68I03JJA67I02 = $(this).attr("A68I03JJA67I02");   	      
+    	       var A68I04JJA31I02 = $(this).attr("A68I04JJA31I02");   	      
+    	       var A68I13JJA12I02 = $(this).attr("A68I13JJA12I02");     	       
+    	       if(A68I04JJA31I02!=''&&A68I04JJA31I02!=undefined){
+    	          //ajaxTagFunction(ThisWebUrl + '/action/upload/action/UploadSerial.aspx?A68I03JJA67I02='+A68I03JJA67I02+'&A68I04JJA31I02='+A68I04JJA31I02+"&A68I13JJA12I02="+A68I13JJA12I02,'AjaxDialog5',1,0);               	                
+    	          var str = "?A68I03JJA67I02="+A68I03JJA67I02+"&A68I04JJA31I02="+A68I04JJA31I02+"&A68I13JJA12I02="+A68I13JJA12I02;
+    	          $( "#AjaxDialog5" ).html(' <iframe id="UploadFrame" src="'+ThisWebUrl+'/action/Upload/action/UploadSerial.aspx'+str+'" style="min-height:230px;width:380px;overflow:hidden;"></iframe>');
+    	          $( "#AjaxDialog5" ).dialog( "open" );  
+    	       }else{alert("error-1!!");}               
+    	       
+    });                 
+
+     </script>   

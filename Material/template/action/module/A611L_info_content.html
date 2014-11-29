@@ -1,0 +1,54 @@
+<style>
+  #ReportTable th{
+  	 background-color:#87b87f;
+  	 color:#fff;
+  	 font-size:15px;
+  }
+
+</style>
+<br>
+  
+<div id="AjaxFace" class="">
+	 <div style="text-align:right;">  	 	
+	 	 
+	 </div>
+   <table id="ReportTable" style="font-size:13px;" class="table table-striped">	
+   	  <tr style="background-color:#87b87f;">   	  	 
+   	  	 <th>品項名稱</th>	
+   	  	 <th>訂單總數量</th>	
+   	  	 <th>訂單剩餘數量</th>	   	  	 
+         <th>貨倉數量</th>	      	         
+         <th>已出貨數量</th>	      	
+         <!-- BEGIN List2 -->   
+         <th>{{Contractor}}</th>	  
+         <!-- END List2 --> 
+         <th>N1 合計</th>	      	      
+         <th>N2 合計</th>	      	      
+      </tr>
+   	  {{HTML}}      
+   </table>   
+   <textarea id="iHTML" class="iHTML" name="iHTML" style="display:none;"></textarea>
+    <input type="text" name="filename" value="report01" style="display:none;">
+</div>
+
+
+
+  
+ <script  type="text/javascript">
+ 	$( ".HideV" ).css("display","");
+  
+  
+   
+  
+
+
+ 	
+  $("#OrderTable tr").dblclick(function () {    
+  	
+ 	 	         $("#OrderTable tr").removeClass( "CircleTR" );       
+    	       $(this).addClass( "CircleTR" );
+    });
+                                 
+  </script>        
+   
+  

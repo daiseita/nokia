@@ -1,0 +1,110 @@
+<style>
+	.ParV {
+	    display:block;	
+	}
+</style>
+       <table id="ListTable" class="table " >
+           <thead>
+               <tr>
+                   <th></th>
+                   <th><h5>出貨日 </h5> </th>                   
+                   <th><h5>承包商 </h5></th>                                       
+                   <th><h5>品項名稱 </h5></th>                                       
+                   <th><h5>數量 </h5></th>                                       
+                   <th><h5>說明 </h5></th>                                       
+                   <th><h5>建立時間 </h5></th> 
+                   <th><h5> </h5></th> 
+               </tr>
+           </thead>
+           <tbody>              
+                <!-- BEGIN List1 -->
+                <tr class="" A74I02JJA67I02="{{A74I02JJA67I02}}" A74I01XA="{{A74I01XA}}">
+                   <td>{{Serial}}            </td>                   
+                   <td>{{A74I02JJA67I02}} &nbsp;&nbsp; &nbsp; &nbsp;   {{A74D01}}     </td>     
+                   <td>{{A12F01NV0064}}      </td>     
+                   <td>{{A31F01NV0064}}    </td>   
+                   <td>{{A74F01FD0400}}    </td>                                                                                      
+                   <td>{{A74F02NT}}    </td>                                                                                      
+                   <td>{{A74INA}}    </td> 
+                   <td>
+                   	 <button class="btn btn-info btn-xs PlusBtn"  A74D01="{{A74D01}}"  A74I03JJA12I02="{{A74I03JJA12I02}}"  A74I04JJA31I02="{{A74I04JJA31I02}}"  A74I02JJA67I02="{{A74I02JJA67I02}}"  onclick="" type="button">增加</button>
+	 	                 <button class="btn btn-danger btn-xs MinusBtn"  A74D01="{{A74D01}}"  A74I03JJA12I02="{{A74I03JJA12I02}}" A74I04JJA31I02="{{A74I04JJA31I02}}" A74I02JJA67I02="{{A74I02JJA67I02}}"  onclick="" type="button">減少</button>
+                   </td> 
+               </tr>
+                <!-- END List1 -->               
+           </tbody>           
+       </table>      
+       <div  class="widget-header hidden-480" style="font-size:13px;">
+           <span>
+           	     從 <span id="JsTem-DataFromTag"></span> -  <span id="JsTem-DataEndTag"></span>  筆   共計   <span id="JsTem-DataCountTag"></span>  筆 
+           </span>
+           <button type="button" class="btn btn-info btn-xs" onclick="Hy_Template_Engine_PageMove_Request('First')">第一頁</button>  
+           <button type="button" class="btn btn-info btn-xs" onclick="Hy_Template_Engine_PageMove_Request('Prev')">上一頁</button>  
+           <span >
+           	        &nbsp;&nbsp;<input type="text" id="JsTem-ThisPageInput" style="width:40px;text-align:center;" class="PageBtn SubmitDisable" name="PageBtn" value=""><span id="JsTem-ThisPageTag" style="display:none;"></span>  /  <span id="JsTem-PageCountTag"></span>  頁&nbsp;&nbsp;
+           </span>
+           <button type="button" class="btn btn-info btn-xs" onclick="Hy_Template_Engine_PageMove_Request('Next')">下一頁</button>
+           <button type="button" class="btn btn-info btn-xs" onclick="Hy_Template_Engine_PageMove_Request('Last')">最末頁</button>&nbsp;&nbsp&nbsp;&nbsp                      
+           <input id="SearchTxt" class="SubmitDisable hidden-720" type="text" placeholder="Search">
+           <button type="button" class="btn btn-success btn-xs hidden-720" onclick="Hy_Template_Engine_Reload_JData();">搜&nbsp;&nbsp;尋</button>
+       </div>
+    
+
+ <script  type="text/javascript">
+ 	$(".ParV").show();
+ 	 $( "#ListTable tr").unbind();
+ 	 $("#ListTable tr").dblclick(function () {    
+ 	 	         $("#ListTable tr").removeClass( "CircleTR" );       
+    	       $(this).addClass( "CircleTR" );
+    });
+   $(".PlusBtn").unbind();
+ 	 $(".PlusBtn").click(function () {         
+ 	 	        var A74I02JJA67I02 = $(this).attr("A74I02JJA67I02");  
+ 	 	        var A74I03JJA12I02 = $(this).attr("A74I03JJA12I02");  
+ 	 	        var A74I04JJA31I02 = $(this).attr("A74I04JJA31I02");  
+ 	 	        var A74D01 = $(this).attr("A74D01");  
+ 	 	        A74D01=A74D01.replace('/','');
+ 	 	        A74D01=A74D01.replace('/','');
+ 	 	        if(A74I02JJA67I02!=''&&A74I02JJA67I02!=undefined){ 
+ 	 	        	  var str = "A74I02JJA67I02=" +A74I02JJA67I02+"&A74I03JJA12I02="+A74I03JJA12I02+"&A74I04JJA31I02="+A74I04JJA31I02+"&A74D01="+A74D01;
+ 	 	        	  ajaxTagFunction(ThisWebUrl + '/action/Module/A608L/Plus.ashx?'+str,'AjaxDialog2',1,0);               	                    	                   	       
+             	  $( "#AjaxDialog2" ).dialog( "open" );     	 	        	 	 	    	 	        	
+ 	 	        } 	 	       	                 	       
+    });
+   $(".MinusBtn").unbind();
+ 	 $(".MinusBtn").click(function () {         
+ 	 	        
+ 	 	        var A74I02JJA67I02 = $(this).attr("A74I02JJA67I02");  
+ 	 	        var A74I03JJA12I02 = $(this).attr("A74I03JJA12I02");  
+ 	 	        var A74I04JJA31I02 = $(this).attr("A74I04JJA31I02");  
+ 	 	        var A74D01 = $(this).attr("A74D01");  
+ 	 	        A74D01=A74D01.replace('/','');
+ 	 	        A74D01=A74D01.replace('/','');
+ 	 	        if(A74I02JJA67I02!=''&&A74I02JJA67I02!=undefined){ 
+ 	 	        	  var str = "A74I02JJA67I02=" +A74I02JJA67I02+"&A74I03JJA12I02="+A74I03JJA12I02+"&A74I04JJA31I02="+A74I04JJA31I02+"&A74D01="+A74D01;
+ 	 	        	  ajaxTagFunction(ThisWebUrl + '/action/Module/A608L/Info.ashx?'+str,'AjaxDialog3',1,0);               	                    	                   	       
+             	  $( "#AjaxDialog3" ).dialog( "open" );     	 	        	 	 	    	 	        	
+             	  ThisReloadUrl = ThisWebUrl + '/action/Module/A608L/Info.ashx?'+str;
+ 	 	        } 	 	       	                 	       
+    });
+ 	   
+ 	   
+ 	   
+     /* 避免bootstrap input內按enter時 網頁重新整理 */
+   $('.SubmitDisable').keydown(function(event){
+          if(event.keyCode == 13) { event.preventDefault(); return false; }
+   });   
+   $('#SearchTxt').keyup(function(event){
+          if(event.keyCode == 13) { 
+          	  Hy_Template_Engine_Reload_JData();          	  
+          	  return false;           	  
+          }
+   });   
+   $('#JsTem-ThisPageInput').keyup(function(event){
+          if(event.keyCode == 13) {           	  
+          	  Hy_Template_Engine_PageMove_Request(this.value);
+          	  return false;           	  
+          }
+   });
+</script>	  
+   

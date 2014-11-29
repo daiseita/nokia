@@ -1,0 +1,112 @@
+<style>
+  #OrderTable th{
+  	 background-color:#87b87f;
+  	 color:#fff;
+  	 font-size:15px;
+  }
+
+</style>
+<br>
+<script  type="text/javascript">
+	 var goAjaxEventStatus = function(A68I03JJA67I02, A12I02UV0010,A31I02UV0010,A68D01) {			 	 	
+	 	
+        $('#chk'+A68I03JJA67I02+A12I02UV0010+A31I02UV0010+A68D01).kcwAjax(ThisWebUrl + '/action/Module/A605L/Arrival.ashx?Action=status&A73I02JJA67I02='+A68I03JJA67I02+'&A73I03JJA12I02='+A12I02UV0010+"&A73D01="+A68D01+"&A73I04JJA31I02="+A31I02UV0010,{
+                       	    Job:"LINK",
+                       	    Response: {
+	  	                      	         ToExecute: false,
+	  	                      	         ToGoal: false,
+	  	                      	         ToTrigger: false
+	  	                      },
+                       	    LocalEvents: {
+                       	    	success: function(Trigger,GoalTag,TriggerGoalTag,Response) {
+                      	    		         /*   alert(Response);  */
+                       	    		           if(Response=="OK"){
+                       	    		           	   $('.cnf'+A68I03JJA67I02+A12I02UV0010+A31I02UV0010+A68D01).remove();
+                       	    		           	   $('.err'+A68I03JJA67I02+A12I02UV0010+A31I02UV0010+A68D01).remove();
+                       	    		           	   $('.chk'+A68I03JJA67I02+A12I02UV0010+A31I02UV0010+A68D01).html("<div style='color:#d15b47;'>已到貨</div>");                       	    		           	   
+                       	    		           }else{
+                       	    		           	   $('.chk'+A68I03JJA67I02+A12I02UV0010+A31I02UV0010+A68D01).html("<div style='color:#eeeeee;'>未到貨</div>");
+                       	    		           	  
+                       	    		           }
+                                           
+                       	    		       }
+                       	      }
+                       	  }); 	
+      }
+</script>     
+<div class="">
+   <table id="OrderTable" style="font-size:13px;" class="table table-striped">	
+   	  <tr style="background-color:#ff0000;">
+   	  	 <th></th>
+   	  	 <th>到貨日期</th>	
+   	  	 <th>供應商名稱</th>	
+         <th>承包商名稱</th>	      	         
+         <th >品項名稱</th>	      	
+         <th>實際到貨數量</th>	    
+         <th>狀態</th>	      	
+         <th></th>	      	
+      </tr>
+   	  <!-- BEGIN List1 -->   
+      <tr >
+      	 <td>#{{serial}}</td>	    
+      	 <td>{{A68D01}}</td>  	
+      	 <td>{{A12F01NV00641}}</td>
+         <td>{{A12F01NV0064}}</td>	      	
+         <td>{{A31F01NV0064}}</td>
+         <td>{{cnt}}</td>
+         <td>
+         	 <div id="chk{{A67I02UV0012}}{{A68I13JJA12I02}}{{A68I04JJA31I02}}{{A68D01_S}}"  class="chk{{A67I02UV0012}}{{A68I13JJA12I02}}{{A68I04JJA31I02}}{{A68D01_S}}">待查詢</div>
+         	 <script  type="text/javascript">         	 	 
+         	 	           	 	 
+         	 	   goAjaxEventStatus("{{A67I02UV0012}}","{{A68I13JJA12I02}}","{{A68I04JJA31I02}}","{{A68D01_S}}");
+         	 </script>     
+         </td>	 
+         <td>
+         	 <div class="Hide{{A31I08CV0001}}" style="display:none;">
+         	  {{A31I08CV0001_NAME}} 
+         	  <button class="btn btn-warning btn-xs SerialBtn" A68I03JJA67I02="{{A68I03JJA67I02}}" A68I04JJA31I02="{{A68I04JJA31I02}}" A68I13JJA12I02="{{A68I13JJA12I02}}" onclick="" type="button">序號</button>
+         	 </div>  
+         </td>	      	
+      </tr>
+      <!-- END List1 -->            
+   </table>
+</div>
+
+
+  
+ <script  type="text/javascript">
+ 	$( ".HideV" ).css("display","");
+ 	
+  $("#OrderTable tr").dblclick(function () {    
+  	
+ 	 	         $("#OrderTable tr").removeClass( "CircleTR" );       
+    	       $(this).addClass( "CircleTR" );
+    	        
+    });
+    
+    function LoadSerialList(A68I03JJA67I02, A68I04JJA31I02,A68I13JJA12I02) {
+        ajaxTagFunction(ThisWebUrl + '/action/Module/A603L/Serial.ashx?A68I03JJA67I02='+A68I03JJA67I02+'&A68I04JJA31I02='+A68I04JJA31I02+"&A68I13JJA12I02="+A68I13JJA12I02,'AjaxDialog3',1,0);               	                
+        $( "#AjaxDialog5" ).dialog( "close" );
+    }
+                      
+$(".SerialBtn").click(function () {            
+	           var pHtml ='<div style="width:100%;text-align:center;padding-top:80px;">' +
+                        '<img src="'+ThisWebUrl+'/assets/images/loadering.gif" alt="Smiley face" height="120" width="120">' +
+                        '<div style="font-size:16px;">系統處理中....請稍候!!</div>' +
+                        '</div>';
+    	       $( "#AjaxDialog3" ).html(pHtml);                    	      	       
+             //$("#AjaxDialog3 span.ui-dialog-title").text('序號表');       
+    	       var A68I03JJA67I02 = $(this).attr("A68I03JJA67I02");   	      
+    	       var A68I04JJA31I02 = $(this).attr("A68I04JJA31I02");   	      
+    	       var A68I13JJA12I02 = $(this).attr("A68I13JJA12I02"); 
+    	       if(A68I04JJA31I02!=''&&A68I04JJA31I02!=undefined){
+    	          LoadSerialList(A68I03JJA67I02,A68I04JJA31I02,A68I13JJA12I02);
+    	          $( "#AjaxDialog3" ).dialog( "open" );  
+    	       }else{alert("請先選取資料!!");}               
+    	       
+    });                             
+    
+            
+      </script>        
+   
+  

@@ -1,0 +1,46 @@
+<style>
+  #OrderTable th{
+  	 background-color:#87b87f;
+  	 color:#fff;
+  	 font-size:15px;
+  }
+
+</style>
+<br>
+<div class="">
+   <table id="OrderTable" style="font-size:13px;" class="table table-striped">	
+   	  <tr style="background-color:#ff0000;">
+   	  	 <th></th>
+         <th> sku                    </th>	   	         
+         <th> Description on System  </th>	   	                  
+         <th> Item NO.               </th>	   	                  
+         <th> Q'TY                   </th>	   	                  
+         <th> Packing#               </th>	   	                  
+         <th> SO#                    </th>	   	                  
+         <th> 排序                   </th>	   	                  
+         <th> CASE NO.               </th>     	                  
+         <th> N/PK                   </th>	   	                             	                             	         
+         <th> 序號                   </th>	    	
+      </tr>
+   	  <!-- BEGIN List1 -->   
+      <tr>
+      	 <td>#{{serial}}</td>	      	
+         <td> {{A63F08CV0064}}</td>	 
+         <td> {{A63F09CV0128}}    </td>	 
+         <td> {{A63I10CV0032}}</td>	 
+         <td> {{A63I11CV0032}}</td>	 
+         <td> {{A63I12CV0032}}</td>	 
+         <td> {{A63I13CV0032}}</td>	 
+         <td> {{A63I14CV0032}}</td>	 
+         <td> {{A63I15CV0032}}</td>  
+         <td> {{A63I16CV0032}}</td>	                            	 
+         <td> <div id="NumBox{{A63I02JJA61I02}}"></div>   {{A63I03CV0032}}  </td>    	
+         <script  type="text/javascript">
+             // ajaxTagFunction( ThisWebUrl +  '/action/Module/A602G/SerialCode.ashx?A63I02JJA61I02={{A63I02JJA61I02}}','NumBox{{A63I02JJA61I02}}',1,0);       
+         </script>	  
+      </tr>
+      <!-- END List1 -->            
+   </table>
+</div>
+
+   

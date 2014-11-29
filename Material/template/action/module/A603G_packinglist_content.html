@@ -1,0 +1,35 @@
+<style>
+  #OrderTable th{
+  	 background-color:#87b87f;
+  	 color:#fff;
+  	 font-size:15px;
+  }
+
+</style>
+<br>
+<div class="">
+   <table id="PackingTable" style="font-size:13px;" class="table table-striped">	
+   	  <tr >
+   	  	 <th>選擇資料日期</th>
+         <th>{{A68D01.HTML_SELECT}}</th>	      	         
+         <th><button class="btn btn-success btn-xs ExportBtn" onclick="" type="button">匯出出貨單</button></th>	      	         
+      </tr>        
+   </table>
+</div>
+<iframe id="ExcelData" src="" style="min-height:0px;width:0px;display:none;"></iframe>         
+
+  <script type="text/javascript">           
+  
+   $(".ExportBtn").click(function() {      	     	
+                    var A68D01 = $(".A68D01").val();            
+                    	   
+                    if(A68D01!=''&&A68IND!=undefined){            
+                    
+                    	   $("#ExcelData").attr("src",ThisWebUrl+"/action/Module/A603G/ExportExcel.ashx?A68IND="+A68D01);    	                        	                   
+    	                }else{alert("請先選取日期!!");
+    	               
+    	               }    
+              });
+  	
+  	
+  </script>     

@@ -1,0 +1,43 @@
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td {
+	margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent
+}
+table {
+ font-size:inherit;
+}
+pre, code, kbd, samp, tt {
+ font-family:monospace;
+ line-height:100%;
+}
+.setCol_0 {
+	display:inline;	float: left;	position: relative; margin-left: 0px;
+}
+.setCol_5 {
+	display:inline;	float: left;	position: relative; margin-left: 5px;
+}
+.setCol_10 {
+	display:inline;	float: left;	position: relative; margin-left: 10px;
+}
+.setCol_15 {
+	display:inline;	float: left;	position: relative; margin-left: 15px;
+}
+.setCol_20 {
+	display:inline;	float: left;	position: relative; margin-left: 20px;
+}
+.setRCol_0 {
+	display:inline;	float: right;	position: relative; margin-right: 0px;
+}
+.setRCol_5 {
+	display:inline;	float: right;	position: relative; margin-right: 5px;
+}
+.setRCol_10 {
+	display:inline;	float: right;	position: relative; margin-right: 10px;
+}
+.setRCol_15 {
+	display:inline;	float: right;	position: relative; margin-right: 15px;
+}
+.setRCol_20 {
+	display:inline;	float: right;	position: relative; margin-right: 20px;
+}
+.HYclearfix {
+	display: inline-block;
+}

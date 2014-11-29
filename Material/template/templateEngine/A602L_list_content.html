@@ -1,0 +1,92 @@
+<style>
+	.ParV {
+	    display:block;	
+	}
+</style>
+       <table id="ListTable" class="table " >
+           <thead>
+               <tr>
+                   <th></th>
+                   <th><h5>入料編碼 </h5> </th>                   
+                   <th><h5>內容</h5> </th>                                       
+               </tr>
+           </thead>
+           <tbody>              
+                <!-- BEGIN List1 -->
+                <tr class="" A65I02UV0012="{{A65I02UV0012}}" A65I01XA="{{A65I01XA}}">
+                   <td>{{Serial}}            </td>                   
+                   <td>{{A65I02UV0012}} <sapn style="margin-left:20px;">{{A65F02NV0128}}</span>     </td>     
+                   <td> <span id="InfoS{{A65I02UV0012}}" style="padding:0px;"></span>    </td>                                                                                      
+               </tr>
+                <script  type="text/javascript">
+               	    ajaxTagFunction( ThisWebUrl +  '/action/Module/A602L/Info_S.ashx?A65I02UV0012={{A65I02UV0012}}','InfoS{{A65I02UV0012}}',1,0);  
+               </script>	  
+                <!-- END List1 -->               
+           </tbody>           
+       </table>      
+       <div  class="widget-header hidden-480" style="font-size:13px;">
+           <span>
+           	     從 <span id="JsTem-DataFromTag"></span> -  <span id="JsTem-DataEndTag"></span>  筆   共計   <span id="JsTem-DataCountTag"></span>  筆 
+           </span>
+           <button type="button" class="btn btn-info btn-xs" onclick="Hy_Template_Engine_PageMove_Request('First')">第一頁</button>  
+           <button type="button" class="btn btn-info btn-xs" onclick="Hy_Template_Engine_PageMove_Request('Prev')">上一頁</button>  
+           <span >
+           	        &nbsp;&nbsp;<input type="text" id="JsTem-ThisPageInput" style="width:40px;text-align:center;" class="PageBtn SubmitDisable" name="PageBtn" value=""><span id="JsTem-ThisPageTag" style="display:none;"></span>  /  <span id="JsTem-PageCountTag"></span>  頁&nbsp;&nbsp;
+           </span>
+           <button type="button" class="btn btn-info btn-xs" onclick="Hy_Template_Engine_PageMove_Request('Next')">下一頁</button>
+           <button type="button" class="btn btn-info btn-xs" onclick="Hy_Template_Engine_PageMove_Request('Last')">最末頁</button>&nbsp;&nbsp&nbsp;&nbsp                      
+           <input id="SearchTxt" class="SubmitDisable hidden-720" type="text" placeholder="Search">
+           <button type="button" class="btn btn-success btn-xs hidden-720" onclick="Hy_Template_Engine_Reload_JData();">搜&nbsp;&nbsp;尋</button>
+       </div>
+    
+
+ <script  type="text/javascript">
+ 	$(".ParV").show();
+ 	$( "#ListTable tr").unbind();
+ 	 $("#ListTable tr").dblclick(function () {    
+ 	 	         $("#ListTable tr").removeClass( "CircleTR" );       
+    	       $(this).addClass( "CircleTR" );
+    });
+   $( ".InfoBtn").unbind();
+ 	 $(".InfoBtn").click(function () {            
+    	       $( "#AjaxDialog2" ).html("");                    	      	       
+             //$("span.ui-dialog-title").text('出料內容');       
+    	       var A65I02UV0012 = $(".CircleTR").attr("A65I02UV0012");   	                   
+    	       if(A65I02UV0012!=''&&A65I02UV0012!=undefined){
+    	          ajaxTagFunction( ThisWebUrl +  '/action/Module/A602L/Info.ashx?A65I02UV0012='+A65I02UV0012,'AjaxDialog2',1,0);  
+    	          $( "#AjaxDialog2" ).dialog( "open" );  
+    	       }else{alert("請先選取資料!!");}               
+    	       
+    });
+    $( ".DelBtn").unbind();
+    $(".DelBtn").click(function () {                         	                    	             	
+    	       var A65I01XA = $(".CircleTR").attr("A65I01XA");   	
+    	       if(A65I01XA!=''&&A65I01XA!=undefined){               	                  	             	                	       
+    	           if(confirm("確認是否刪除?"))
+                 {
+                      var str =  ThisWebUrl +  "/Module/A602L/face.ashx?A65I01XA="+A65I01XA+"&Del=Del";
+                      ajaxTagFunction(str,'AjaxDialog',1,1);
+                      Hy_Template_Engine_PageMove_Request("First");                 
+                 }             
+             }else{alert("請先選取資料!!");}              
+    });
+ 	
+   
+     /* 避免bootstrap input內按enter時 網頁重新整理 */
+   $('.SubmitDisable').keydown(function(event){
+          if(event.keyCode == 13) { event.preventDefault(); return false; }
+   });   
+   $('#SearchTxt').keyup(function(event){
+          if(event.keyCode == 13) { 
+          	  Hy_Template_Engine_Reload_JData();          	  
+          	  return false;           	  
+          }
+   });   
+   $('#JsTem-ThisPageInput').keyup(function(event){
+          if(event.keyCode == 13) {           	  
+          	  Hy_Template_Engine_PageMove_Request(this.value);
+          	  return false;           	  
+          }
+   });
+</script>	  
+   

@@ -1,0 +1,46 @@
+       
+      <table id="AjaxFace" style="width:100%;">
+      	<tr style="display:none;">
+      	    <th width="100"> <input type="text"  name="Action" id="Action"   value="{{Action}}" >{{A10I01XA.HTML_HIDDEN}}	</th><td></td>
+      	</tr>
+      	<tr>
+        	<th width="100">啟用狀態</th>        	
+        	<td>  
+        		{{A10I04CV0001.HTML_RADIO}}        	
+          </td>
+        </tr>
+        <tr>
+        	<th width="100">帳號</th>
+          <td>{{A10I02UV0064.HTML_TEXT}}   <span class="MarkStar">* 至少6碼</span> </td>
+        </tr>
+        <tr>
+        	<th width="100">密碼</th>
+          <td>{{A10F01CV0032.HTML_TEXT}}  <span class="MarkStar">*</span>  </td>
+        </tr>
+        <tr>
+        	<th width="100">使用人</th>
+        	<td>{{A10I03JJA20I02.HTML_SELECT}}   <span class="MarkStar">*</span> </td>
+        </tr>
+         <tr>
+        	<th width="100">顯示名稱</th>
+        	<td>{{A10F02NV0032.HTML_TEXT}}   <span class="MarkStar">*</span> </td>
+        </tr>       
+      </table>    
+      <div id="RtnMsg" style="width:400px;text-align:center;"></div>       
+      <script type="text/javascript">        
+ 	           $( "#radio" ).buttonset();
+
+             $(".A10I02UV0064,.A10F01CV0032,.A10I03JJA20I02,A10F02NV0032").width("220");               
+             
+             
+             if('{{Action}}'=='Add'){
+                  $(".E01F01NV0256").attr("tittle","請輸入中文");
+                  $(".A10I02UV0064").attr("tittle","請輸入英文,數字");
+             }
+             $("#AjaxFace").Hy_Validate({
+                  	  id:"#AjaxFace",
+                     Column_Require:"A10I02UV0064,A10I03JJA20I02,A10F01CV0032,A10F02NV0032",
+                     Column_NoChinese:"A10I02UV0064,A10F01CV0032" ,
+                     Column_NumericEnglish:"A10I02UV0064"               
+            });  
+      </script>        

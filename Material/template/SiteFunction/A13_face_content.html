@@ -1,0 +1,57 @@
+       
+      <table id="AjaxFace" style="width:100%;">
+      	<tr style="display:none;">
+      	    <th width="100"> <input type="text"  name="Action" id="Action"   value="{{Action}}" >{{A13I01XA.HTML_HIDDEN}}	</th><td></td>
+      	</tr>
+      	<tr>
+        	<th width="100">啟用狀態</th>        	
+        	<td>  
+        		{{A13I03CV0001.HTML_RADIO}}        	
+          </td>
+        </tr>
+        <tr>
+        	<th width="100">名稱&縮寫</th>
+          <td>{{A13F01NV0064.HTML_TEXT}} <span class="MarkStar">*</span> {{A13F07NV0012.HTML_TEXT}}  </td>
+        </tr>
+        <tr>
+        	<th width="100">室內電話</th>
+          <td>{{A13F03CV0016.HTML_TEXT}}  </td>
+        </tr>
+        <tr>
+        	<th width="100">行動電話</th>
+        	<td>{{A13F04CV0016.HTML_TEXT}}   </td>
+        </tr>
+         <tr>
+        	<th width="100">地址</th>
+        	<td>{{A13I07JJA02I02.HTML_SELECT}}  {{A13I08JJA03I02.HTML_SELECT}} <br>{{A13F05NV0256.HTML_TEXT}}  </td>
+        </tr>   
+        <tr>
+        	<th width="100">說明</th>
+        	<td>{{A13F06NV0064.HTML_TEXTAREA}}  </td>
+        </tr>       
+      </table>    
+      <div id="RtnMsg" style="width:400px;text-align:center;"></div>       
+      <script type="text/javascript">        
+ 	           
+ 	           var oSelect = new hy_SelectHtml();
+             var pUrl = ThisWebUrl + "/action/select/address/Select.ashx";
+             //oSelect.setBaicWhere("E31I07CV0001","");
+             oSelect.initEvent("A13I07JJA02I02","A13I08JJA03I02","A03" ,"A03I02UV0003","A03F01NV0016","A03I03JJA02I02","{{A13I08JJA03I02}}",pUrl);
+ 	           
+
+             $(".A13F01NV0064,.A13F03CV0016,.A13F04CV0016").width("220");               
+             $(".A13F07NV0012").width("60");               
+             $(".A13F05NV0256,.A13F06NV0064").width("320");               
+             $(".A13F06NV0064").height("60");    
+             
+             
+             if('{{Action}}'=='Add'){
+                  $(".E01F01NV0256").attr("tittle","請輸入中文");
+                  $(".A10I02UV0064").attr("tittle","請輸入英文,數字");
+             }
+             $("#AjaxFace").Hy_Validate({
+                  	  id:"#AjaxFace",
+                     Column_Require:"A13F07NV0012",                     
+                     Column_Numeric:"A13F03CV0016,A13F04CV0016"               
+            });  
+      </script>        

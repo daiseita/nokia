@@ -1,0 +1,61 @@
+
+       <table id="ListTable" class="table " >
+           <thead>
+               <tr>
+                   <th></th>
+                   <th><h5>品項名稱 </h5> </th>                   
+                   <th><h5>數量 </h5> </th>                   
+               </tr>
+           </thead>
+           <tbody>              
+                <!-- BEGIN List1 -->
+                <tr class="" >
+                   <td>{{Serial}}            </td>                   
+                   <td>{{A31F01NV0064}} </td>
+                   <td>{{cnt}}      </td>                   
+               </tr>
+                <!-- END List1 -->               
+           </tbody>           
+       </table>      
+       <div  class="widget-header hidden-480" style="font-size:13px;">
+           <span>
+           	     從 <span id="JsTem-DataFromTag"></span> -  <span id="JsTem-DataEndTag"></span>  筆   共計   <span id="JsTem-DataCountTag"></span>  筆 
+           </span>
+           <button type="button" class="btn btn-info btn-xs" onclick="Hy_Template_Engine_PageMove_Request('First')">第一頁</button>  
+           <button type="button" class="btn btn-info btn-xs" onclick="Hy_Template_Engine_PageMove_Request('Prev')">上一頁</button>  
+           <span >
+           	        &nbsp;&nbsp;<input type="text" id="JsTem-ThisPageInput" style="width:40px;text-align:center;" class="PageBtn SubmitDisable" name="PageBtn" value=""><span id="JsTem-ThisPageTag" style="display:none;"></span>  /  <span id="JsTem-PageCountTag"></span>  頁&nbsp;&nbsp;
+           </span>
+           <button type="button" class="btn btn-info btn-xs" onclick="Hy_Template_Engine_PageMove_Request('Next')">下一頁</button>
+           <button type="button" class="btn btn-info btn-xs" onclick="Hy_Template_Engine_PageMove_Request('Last')">最末頁</button>&nbsp;&nbsp&nbsp;&nbsp                      
+           承包商
+           {{A12I02UV0010.HTML_SELECT}}
+           <input id="SearchTxt" class="SubmitDisable hidden-720" type="text" placeholder="Search">           
+           <button type="button" class="btn btn-success btn-xs hidden-720" onclick="Hy_Template_Engine_Reload_JData();">搜&nbsp;&nbsp;尋</button>
+           
+       </div>
+    
+
+ <script  type="text/javascript">
+ 	$( "#A12I02UV0010" ).change(function() {
+      Hy_Template_Engine_Reload_JData();
+  });
+
+     /* 避免bootstrap input內按enter時 網頁重新整理 */
+   $('.SubmitDisable').keydown(function(event){
+          if(event.keyCode == 13) { event.preventDefault(); return false; }
+   });
+   $('#SearchTxt').keyup(function(event){
+          if(event.keyCode == 13) { 
+          	  Hy_Template_Engine_Reload_JData();          	  
+          	  return false;           	  
+          }
+   });
+   $('#JsTem-ThisPageInput').keyup(function(event){
+          if(event.keyCode == 13) {           	  
+          	  Hy_Template_Engine_PageMove_Request(this.value);
+          	  return false;           	  
+          }
+   });
+</script>	  
+   

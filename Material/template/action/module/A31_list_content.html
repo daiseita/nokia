@@ -1,0 +1,47 @@
+ <div style="height:50px;width:100%;" id="AddBox">
+ 	  {{Action.HTML_HIDDEN}}
+ 	  {{A31I11JJA31I02.HTML_HIDDEN}}<br>
+ 	  <input type="text" name="A31F01NV0064" style="width:260px;" class="A31F01NV0064" value="{{A31F01NV0064_INPUT}}" >
+ 	  <button id="AddChBtn" class="btn btn-xs btn-purple" style="font-size:13px;"  type="button">新增</button>
+ </div>	
+ <div class=""> 
+  <!-- BEGIN List1 -->       
+    <div class="label label-lg label-purple arrowed HYclearfix LaB{{A31I01XA}}" style="margin-bottom:5px;width:300px;">
+      <span style="float:left">	[{{A31I12FD0200}}] &nbsp;&nbsp;{{A31F01NV0064}} </span>
+    	
+    	<i class="icon-trash icon-on-right BtnPartDel"  A31I01XA="{{A31I01XA}}" style="margin-left:20px;cursor:pointer;float:right"></i>
+   </div>   
+  <!-- END List1 -->
+</div>
+<div id="RtnMsg" style="width:200px;text-align:center;margin:auto;"></div>       
+
+
+<script  type="text/javascript">
+	  $(".BtnPartDel").click(function () {                	       
+    	       var A31I01XA = $(this).attr("A31I01XA");   	                   
+    	       if(A31I01XA!=''&&A31I01XA!=undefined){
+    	         if(confirm("確認是否刪除?"))
+                 {
+                      var str =  ThisWebUrl +  "/action/Module/A31/face.ashx?A31I01XA="+A31I01XA+"&Del=Del";
+                      ajaxTagFunction(str,'AjaxDialog',1,1);
+                      Hy_Template_Engine_PageMove_Request("First");     
+                      $(".LaB"+A31I01XA).remove();            
+                }     
+    	          
+    	       }else{alert("請先選取資料!!");}                   	       
+    });
+	  $("#AddChBtn").click(function () {     
+	  	  var A31F01NV0064;
+	  	  A31F01NV0064 = $(".A31F01NV0064").val();           	       
+	  	  if(A31F01NV0064==""){
+	  	  	alert("請先輸入零組件名稱!!");
+	  	  }else{
+	        ajaxTagSubmit(  ThisWebUrl +  '/action/Module/A31/face.ashx',"AddBox",1);
+	      }
+	 });
+	 
+	function ReloadAjaxDialog2(A31I02UV0010) {		     
+		     ajaxTagFunction( ThisWebUrl +  '/action/module/A31/list.ashx?A31I02UV0010='+A31I02UV0010,'AjaxDialog2',1,0);  
+    return "";
+  }
+</script>		

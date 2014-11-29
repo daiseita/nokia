@@ -1,0 +1,151 @@
+<style>	 
+
+</style>
+<div class="widget-box">
+	<div class="widget-header">
+		<h4>功能鍵</h4>
+		<button id="AddBtn" class="btn-info HYBtn hidden-480" type="button"><i class="icon-book  icon-only"></i><br>出料</button>		
+		<button class="btn-danger HYBtn hidden-480 DelBtn" type="button"><i class="icon-trash  icon-only"></i><br>刪除</button>
+		<button class="btn-success HYBtn hidden-480 InfoBtn" type="button" ><i class="icon-cloud  icon-only"></i><br>內容</button>		
+		<button class="btn-warning HYBtn60 hidden-480 PackingBtn" type="button" ><i class="icon-print icon-only"></i><br>出貨單</button>
+	</div>
+
+ 
+</div>
+  
+  
+  <div class="page-header">
+			<h4 class="pink">
+					<i class="icon-hand-right icon-animated-hand-pointer blue"></i>
+					<a href="#modal-table" role="button" class="green" data-toggle="modal"> 出料記錄 </a>
+		  </h4>
+  </div>
+   <div class="bs-example">   	   
+   	   <div id="AjaxList"></div>        	   	      
+   </div>
+   <div id="AjaxDialog" title="出料作業"></div>
+   <div id="AjaxDialog2" title="出料內容"></div>
+   <div id="AjaxDialog3" title="序號表"></div>
+   <div id="AjaxDialog4" title="匯出出貨單"></div>
+   <div id="AjaxDialog5" title="序號匯出"></div>
+    <script  type="text/javascript">
+      
+      function LoadAjaxList(){
+        $("#AjaxList").Hy_Template_Engine({
+            TemplateType: "List",
+            PageNum: 5,         
+            TemplateUrl: ThisWebUrl +  "/template/templateEngine/A603L_list_content.html",
+            JsonDataUrl: ThisWebUrl +  "/action/templateEngine/A603L_list_content_list.ashx",
+            ColumeName_Input: "A67I01XA,A67I02UV0012,A67I03CV0001,A67F01NV0064,A67F02NV0128,A67IND,A67INT,A67INA",
+            ColumeName_Radio: "",
+            ColumeName_Select: "A12I02UV0010_P,A12I02UV0010_C,DateTxt,A31I02UV0010",
+            ColumeName_Parame: "Language",
+            SearchColume: "SearchTxt,A12I02UV0010_P,A12I02UV0010_C,DateTxt,A31I02UV0010,A63I03CV0032"
+        });    
+     }
+     LoadAjaxList();
+   </script>	  
+   
+    <script type="text/javascript">  	           	         	         
+             $("#AddBtn").click(function () {  
+             	       $( "#AjaxDialog" ).html("");                  	       
+             	       //$("span.ui-dialog-title").text('出料作業');           	             	             	       
+             	       ajaxTagFunction(ThisWebUrl + '/Module/A603L/face.ashx','AjaxDialog',1,0);               	                    	                   	       
+             	       $( "#AjaxDialog" ).dialog( "open" );                 
+             });             
+             $(".PackingBtn").click(function () {  
+             	       $( "#AjaxDialog4" ).html("");                  	                    	              	             	             	       
+             	       ajaxTagFunction(ThisWebUrl + '/action/Module/A603L/packinglist.ashx','AjaxDialog4',1,0);               	                    	                   	       
+             	       $( "#AjaxDialog4" ).dialog( "open" );                 
+             });           
+             
+             
+           $( "#AjaxDialog" ).dialog({
+           	  autoOpen: false,
+              resizable: false,
+              height: 630,
+      	      width: 1300,
+              modal: false,
+              buttons: {
+                "送出": function() {
+                	 /* 取訂單明細 */
+                	 var pContent = "";
+                	  $( ".OrderItem" ).each(function( index ) {                	  	        
+                            var pDate = $(this).attr("pData");   	    
+                            if(pDate!="" && pDate!="{{pId}}"){
+                            	 if(pContent!=""){ pContent += ","; }
+                               pContent += pDate
+                            }
+                     });                  	                	                     
+                	  /* 驗証 */
+                    if(pContent!=""){  
+                    	                 var ThisValue = $( "#WorkType :checked" ).val();
+                    	                 $( "#OrderDataString" ).val(pContent);        
+                    	                 if(ThisValue=="B"){
+                    	                 	 ajaxTagSubmit(ThisWebUrl + '/Module/A603L/face_A66.ashx',"AjaxFace",1);	
+                   	                   }else{
+                   	                     ajaxTagSubmit(ThisWebUrl + '/Module/A603L/face.ashx',"AjaxFace",1);	
+                   	                   }                  	                      	             
+                        	             
+                        	             LoadAjaxList();
+                        	             LoaOrderList();
+                        	          }else{
+                        	              alert("請先輸入訂單資料!!");	
+                        	          }
+                },
+                "關閉": function() {
+                  $( this ).dialog( "close" );
+                }
+              }
+            });
+            
+            $( "#AjaxDialog2" ).dialog({
+           	  autoOpen: false,
+              resizable: false,
+              height: 500,
+      	      width: 930,
+              modal: false,
+              buttons: {                
+                "關閉": function() {
+                  $( this ).dialog( "close" );
+                }
+              }
+            });
+            
+           $( "#AjaxDialog3" ).dialog({
+           	  autoOpen: false,
+              resizable: false,
+              height: 600,
+      	      width: 330,
+              modal: false,
+              buttons: {                
+                "關閉": function() {
+                  $( this ).dialog( "close" );
+                }
+              }
+            });       
+            $( "#AjaxDialog4" ).dialog({
+           	  autoOpen: false,
+              resizable: false,
+              height: 200,
+      	      width: 380,
+              modal: false,
+              buttons: {                
+                "關閉": function() {
+                  $( this ).dialog( "close" );
+                }
+              }
+            });             
+            $( "#AjaxDialog5" ).dialog({
+           	  autoOpen: false,
+              resizable: false,
+              height: 350,
+      	      width: 450,
+              modal: false,
+              buttons: {                
+                "關閉": function() {
+                  $( this ).dialog( "close" );
+                }
+              }
+            });                         
+      </script>        

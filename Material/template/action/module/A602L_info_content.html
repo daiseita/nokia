@@ -1,0 +1,68 @@
+<style>
+  #OrderTable th{
+  	 background-color:#87b87f;
+  	 color:#fff;
+  	 font-size:15px;
+  }
+
+</style>
+<br>
+<div class="">
+   <table id="OrderTable" style="font-size:13px;" class="table table-striped">	
+   	  <tr style="background-color:#ff0000;">
+   	  	 <th></th>
+   	  	 <th>入庫日期</th>	 
+   	  	 <th>供應商</th>	  
+         <th>貨倉名稱</th>	      	         
+         <th>品項名稱</th>	      	
+         <th>數量</th>	      	
+         <th></th>	      	
+      </tr>
+   	  <!-- BEGIN List1 -->   
+      <tr >
+      	 <td>#{{serial}}</td>	      	
+      	 <td>{{A66D01}}</td>	
+      	 <td>{{A12F01NV0064}}</td>	
+         <td>{{A19F01NV0032}}</td>	      	
+         <td>{{A31F01NV0064}}</td>
+         <td>{{cnt}}</td>
+         <td>
+         	 <div class="Hide{{A31I08CV0001}}" style="display:none;">
+         	  {{A31I08CV0001_NAME}} 
+         	  <button class="btn btn-warning btn-xs SerialBtn" A66I03JJA67I02="{{A66I03JJA67I02}}" A66I04JJA31I02="{{A66I04JJA31I02}}"  onclick="" type="button">序號</button>
+         	 </div>  
+         </td>	      	
+      </tr>
+      <!-- END List1 -->            
+   </table>
+</div>
+
+
+  
+ <script  type="text/javascript">
+ 	$( ".HideV" ).css("display","");
+ 	
+  $("#OrderTable tr").dblclick(function () {    
+  	
+ 	 	         $("#OrderTable tr").removeClass( "CircleTR" );       
+    	       $(this).addClass( "CircleTR" );
+    });
+                      
+$(".SerialBtn").click(function () {            
+	           var pHtml ='<div style="width:100%;text-align:center;padding-top:80px;">' +
+                        '<img src="'+ThisWebUrl+'/assets/images/loadering.gif" alt="Smiley face" height="120" width="120">' +
+                        '<div style="font-size:16px;">系統處理中....請稍候!!</div>' +
+                        '</div>';
+    	       $( "#AjaxDialog3" ).html(pHtml);                    	      	       
+             //$("#AjaxDialog3 span.ui-dialog-title").text('序號表');       
+    	       var A66I03JJA67I02 = $(this).attr("A66I03JJA67I02");   	      
+    	       var A66I04JJA31I02 = $(this).attr("A66I04JJA31I02");   	      
+    	       if(A66I04JJA31I02!=''&&A66I04JJA31I02!=undefined){
+    	          ajaxTagFunction(ThisWebUrl + '/action/Module/A603L/Serial.ashx?A66I03JJA67I02='+A66I03JJA67I02+'&A66I04JJA31I02='+A66I04JJA31I02,'AjaxDialog3',1,0);               	                
+    	          $( "#AjaxDialog3" ).dialog( "open" );  
+    	       }else{alert("請先選取資料!!");}               
+    	       
+    });                                     
+      </script>        
+   
+  

@@ -1,0 +1,46 @@
+       
+      <table id="AjaxFace" style="width:100%;">
+      	<tr style="display:none;">
+      	    <th width="120"> 
+      	    	<input type="text"  name="Action" id="Action"   value="{{Action}}" >
+      	   	</th>
+      	    <td>{{A74I01XA.HTML_HIDDEN}}{{A74I02JJA67I02.HTML_HIDDEN}}{{A74I03JJA12I02.HTML_HIDDEN}}{{A74I04JJA31I02.HTML_HIDDEN}}{{A74D01.HTML_HIDDEN}}</td>
+      	</tr>    
+      	<tr>
+        	<th width="120">編碼-承包商<div></th>
+        	<td>{{A74I02JJA67I02}}-{{A12F01NV0064}}</td>
+        </tr>     	
+      	<tr>
+        	<th width="120">品項<div></th>
+        	<td>{{A31F01NV0064}}</td>
+        </tr>   
+        <tr>
+        	<th width="120">異常數量<div></th>
+        	<td>{{A74F01FD0400}}</td>
+        </tr>   
+        <tr>
+        	<th width="120">說明<div></th>
+        	<td>{{A74F02NT}}</td>
+        </tr>     
+        <tr>
+        	<th width="120">增加數量</th>
+          <td>{{Num.HTML_TEXT}}   <span class="MarkStar">*</span> </td>
+        </tr>        
+          
+      </table>    
+      <div id="RtnMsg" style="width:400px;text-align:center;"></div>       
+      <script type="text/javascript">        
+ 	           
+             $(".Num").width("60");               
+                   
+             
+             
+             if('{{Action}}'=='Add'){
+                 // $(".E01F01NV0256").attr("tittle","請輸入中文");
+                 // $(".A30I02UV0064").attr("tittle","請輸入英文,數字");
+             }
+             $("#AjaxFace").Hy_Validate({
+                  	  id:"#AjaxFace",
+                     Column_Require:"Num"
+            });  
+      </script>        

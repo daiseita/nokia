@@ -1,0 +1,114 @@
+       <table id="AjaxFace" style="width:100%;">
+      	<tr style="display:none;">
+      	    <th width="150"> <input type="text"  name="Action" id="Action"   value="{{Action}}" >{{A30I01XA.HTML_HIDDEN}}	</th><td></td>
+      	</tr>
+      	<tr>
+        	<th width="150">選擇品項</th>        	
+        	<td>          		 
+        		    <select class="width-80 chosen-select MaterialTxt" id="form-field-select-3" data-placeholder="" name="MaterialTxt" >
+								  {{option}}									  
+							 	</select>        		 						         		 
+          </td>
+        </tr>
+        <tr>
+        	<th width="150">數量</th>
+          <td> 
+          	  <input type="text" style="width:60px;" class="NumTxt" name="NumTxt"> 
+          	  <button id="AddChBtn" class="btn btn-xs btn-info" style="font-size:13px;margin-left:10px;"  type="button">加入</button>  
+          	  <button id="DelChBtn" class="btn btn-xs btn-danger" style="font-size:13px;margin-left:10px;"  type="button">清空</button>               	      
+          </td>
+        </tr>                
+         <tr>
+        	<th width="100">訂單資料</th>
+        	<td id="ShowBox">        		          		       
+          </td>
+        </tr>    
+        <tr>
+        	<th width="100" >預計出貨日</th>
+        	<td id="">        	
+        	      {{A61D01.HTML_TEXT}}	          		       
+          </td>
+        </tr>
+        <tr>
+        	<th width="100">PO number</th>
+        	<td id="">        		         
+        		 {{A60I05CV0032.HTML_TEXT}} 		       
+          </td>
+        </tr>    
+        <tr>
+        	<th width="100">備註</th>
+        	<td id="">        	
+        	      {{A60F02NV0128.HTML_TEXTAREA}}	          		       
+          </td>
+        </tr>   
+        <tr ><th width="100"></th>   <td id="">     <input type="text" id="OrderDataString" style="display:none;" class="OrderDataString" name="OrderDataString"></td> </tr>    
+      </table>    
+      <div id="RtnMsg" style="width:600px;text-align:center;"></div>       
+      <div id="ProgressIMG"></div>
+      
+      <div id="HtmlBox" style="display:none;">
+      	  <div class="label label-lg label-primary  HYclearfix OrderItem It{{cls}}" pData="{{pId}}" style="margin-bottom:5px;width:95%;">
+             <span class="ItName" style="float:left">{{NameTag}}</span>                	                  
+           	<i class="icon-trash icon-on-right BtnMa"  style="margin-left:20px;cursor:pointer;float:right"></i>
+           	<span class="ItNum" style="float:right">數量x <span class="NumBox">{{NumTag}}</span></span>   
+           	<span class="ItDate" style="float:right;margin-right:5px;">[{{DateTag}}]</span>               	
+          </div>      
+      </div>                  
+      <script type="text/javascript">         
+      	
+      	      $('#A61D01').datepicker({
+      	          format: "yyyymmdd",
+      	        todayHighlight: true               
+      	     });        
+      	     $(".A60F02NV0128").width("460");
+      	     $(".chosen-select").chosen(); 
+				     $('#chosen-multiple-style').on('click', function(e){
+				     	  var target = $(e.target).find('input[type=radio]');
+				     	  var which = parseInt(target.val());
+				     	  if(which == 2) $('#form-field-select-4').addClass('tag-input-style');
+				     	   else $('#form-field-select-4').removeClass('tag-input-style');
+				     });              
+      	
+ 	           $(".BtnMa").click(function() {      	     	
+                    $(this).parent().remove();
+              });
+             $("#AddChBtn").click(function() {      
+             	 if(Hy_FormValidate()==true){ 	     	
+                     var pName = $(".chosen-single span").html();                
+                     var pNum =$(".NumTxt").val();                     
+                     var pHtml = $("#HtmlBox").html();
+                     var pDate =$(".A61D01").val();  
+                     pHtml = pHtml.replace("{{NameTag}}",pName);
+                     pHtml = pHtml.replace("{{NumTag}}",pNum);
+                     pHtml = pHtml.replace("{{DateTag}}",pDate);
+                     var pCl = pName
+                     pCl=pCl.replace(/\(/g,'');pCl=pCl.replace(/\)/g,'');pCl=pCl.replace(/\'/g,'');pCl=pCl.replace(/\_/g,'');pCl=pCl.replace(/\ /g,'');pCl=pCl.replace(/\./g,'');pCl=pCl.replace(/\=/g,'');
+                     var pId = $("."+pCl).attr("value") + pDate;                        
+                     var pData = pId + "-" + pNum + "-" +pDate;
+                     if($(".It" +pId).html()!='' && $(".It" +pId).html()!=undefined){
+                     	   var NewNum = $(".It" +pId+" .NumBox").html();
+                     	   NewNum = parseInt(NewNum) + parseInt(pNum);                     	   
+                     	   $(".It" +pId+" .NumBox").html(NewNum);
+                     	   $(".It" +pId).attr("pData",pId+"-"+NewNum);           	   
+                     }else{             
+                     	   pHtml = pHtml.replace("{{cls}}",pId);                                          
+                         pHtml = pHtml.replace("{{pId}}",pData);                                          
+                         $("#ShowBox").append(pHtml);                                                                                
+                         $(".BtnMa").unbind(); 
+                         $(".BtnMa").click(function() {      	     	
+                            $(this).parent().remove();
+                         });
+                     }
+                      $("#RtnMsg").html('');
+                 }
+             }); 
+               $("#DelChBtn").click(function() {  
+               	   $("#ShowBox").html("");  
+              });   	
+             
+             $("#AjaxFace").Hy_Validate({
+                  	  id:"#AjaxFace",
+                     Column_Require:"NumTxt",
+                     Column_Numeric:"NumTxt"
+            });  
+      </script>        

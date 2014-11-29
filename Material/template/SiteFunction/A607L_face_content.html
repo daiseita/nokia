@@ -1,0 +1,205 @@
+
+
+<script>
+  $(function () {
+    $('#myTab a:last').tab('show')
+    $('#XXX1').click();
+  })
+</script>
+<div class="HYclearfix" style="width:100%;">     
+  <div class="setCol_0" style="width:100%">     
+  	  <ul class="nav nav-tabs" role="tablist" id="myTab">
+        <li class="active"><a id="XXX1" href="#home" role="tab" data-toggle="tab">#1</a></li>
+        <li style="display:none;"><a id="XXX2" href="#profile" role="tab" data-toggle="tab"></a></li>
+      </ul>
+      
+      <div class="tab-content">
+        <div class="tab-pane active" id="home">
+        	<div class="HYclearfix" style="width:100%;height:370px;">
+        		 <div class="setCol_0" style="width:50%;">
+        		      <div id="CounterList"></div>
+        		 </div>
+        	   <div class="setRCol_0" style="width:50%;">
+        	      <table id="AjaxFace" style="width:100%;">
+               	<tr style="display:none;">
+               	    <th width="150"> <input type="text"  name="Action" id="Action"   value="Temp" >{{A30I01XA.HTML_HIDDEN}}	</th><td></td>
+               	</tr>
+               	<tr>
+                 	<th width="150">選擇品項</th>        	
+                 	<td>          		 
+                 		    <select class="width-80 chosen-select MaterialTxt" id="form-field-select-3" data-placeholder="" name="MaterialTxt" >
+			         					  {{option}}									  
+			         				 	</select>        		 						         		 
+                   </td>
+                 </tr>
+                 <tr>
+                 	<th width="150">數量</th>
+                   <td> 
+                   	  <input type="text" style="width:60px;" class="NumTxt" name="NumTxt"> 
+                   	  <button id="AddChBtn" class="btn btn-xs btn-info" style="font-size:13px;margin-left:10px;"  type="button">加入</button>  
+                   	  <button id="DelChBtn" class="btn btn-xs btn-danger" style="font-size:13px;margin-left:10px;"  type="button">清空</button>               	      
+                   </td>
+                 </tr>                 
+                 <tr>
+                 	<th width="100">承包商 <br> 移動至承包商</th>
+                 	<td id="">        	
+                 	      {{A61I13JJA12I02.HTML_SELECT}}  <br> {{A61I13JJA12I02_New.HTML_SELECT}}
+                   </td>
+                 </tr>                   
+                  <tr>
+                 	<th width="100">調播資料</th>
+                 	<td id="ShowBox">        		          		       
+                   </td>
+                 </tr>    
+                 <tr>
+                 	<th width="100">備註</th>
+                 	<td id="">        	
+                 	      {{A60F02NV0128.HTML_TEXTAREA}}	          		       
+                   </td>
+                 </tr>   
+                 <tr ><th width="100"></th>   <td id="">     <input type="text" id="OrderDataString" style="display:none;" class="OrderDataString" name="OrderDataString"></td> </tr>    
+               </table>    
+               <div id="RtnMsg" style="width:400px;text-align:center;"></div>       
+               <div id="HtmlBox" style="display:none;">
+               	  <div class="label label-lg label-primary  HYclearfix OrderItem It{{cls}}" pData="{{pId}}"  title="{{pProviderTag}}" style="margin-bottom:5px;width:95%;">
+                      <span class="ItName" style="float:left">{{NameTag}}</span>                	                  
+                    	<i class="icon-trash icon-on-right BtnMa"  style="margin-left:20px;cursor:pointer;float:right"></i>
+                    	<span class="ItNum Cls{{Sum}}" style="float:right">數量x <span class="NumBox">{{NumTag}}</span></span>
+                    	<span class="ItHouse" style="float:right;margin-right:5px;font-size:11px;">[{{HouseTag}}]</span>                	
+                   </div>      
+               </div>        
+             </div>  
+          </div>   
+        </div>
+        <div class="tab-pane" id="profile" style="min-height:360px;">
+        	 
+        	
+        </div>
+      </div>
+  	
+  		
+      
+  </div>  
+                 
+</div>  
+      <script type="text/javascript">           
+      	     
+      	     function LoaOrderList(){
+      	     	
+      	     	 var A68I13JJA12I02 =$("#A61I13JJA12I02").val(); 
+      	     	 if(A68I13JJA12I02!="" && A68I13JJA12I02!=undefined){
+      	     	      var pHtml ='<div style="width:100%;text-align:center;padding-top:80px;">' +
+                             '<img src="'+ThisWebUrl+'/assets/images/loadering.gif" alt="Smiley face" height="120" width="120">' +
+                             '<div style="font-size:16px;">系統處理中....請稍候!!</div>' +
+                             '</div>';
+    	              $( "#CounterList" ).html(pHtml);         	               
+      	            ajaxTagFunction(ThisWebUrl + "/action/Module/A607L/CountList.ashx?A68I13JJA12I02="+A68I13JJA12I02,"CounterList",1,0);    
+      	       }
+      	       
+      	     }
+      	     
+      	     LoaOrderList();
+      	     
+      	     
+      	     
+      	     $(".A60F02NV0128").width("460");
+      	     $(".chosen-select").chosen(); 
+				     $('#chosen-multiple-style').on('click', function(e){
+				     	  var target = $(e.target).find('input[type=radio]');
+				     	  var which = parseInt(target.val());
+				     	  if(which == 2) $('#form-field-select-4').addClass('tag-input-style');
+				     	   else $('#form-field-select-4').removeClass('tag-input-style');
+				     });              
+      	
+ 	           $(".BtnMa").click(function() {      	     	
+                    $(this).parent().remove();
+              });
+             $("#AddChBtn").click(function() {  
+             	 if($("#A61I13JJA12I02").val()==$("#A61I13JJA12I02_New").val()){                     	             	 	
+                     	  	              alert("請檢查選取承包商!!");	
+                     	  	              return;
+               }                     	    
+             	 if(Hy_FormValidate()==true){ 	     	
+                     var pName = $(".chosen-single span").html();                
+                     var pNum =$(".NumTxt").val();                     
+                     var pHtml = $("#HtmlBox").html();
+                     var pHouse =$("#A61I13JJA12I02").val();
+                     var pHouseName =$("#A61I13JJA12I02  :selected").text();                     
+                     var pHouse_New =$("#A61I13JJA12I02_New").val();
+                     var pHouseName_New =$("#A61I13JJA12I02_New  :selected").text();   
+                     pHtml = pHtml.replace("{{NameTag}}",pName);
+                     pHtml = pHtml.replace("{{NumTag}}",pNum);
+                     pHtml = pHtml.replace("{{HouseTag}}",pHouseName_New);
+                     pHtml = pHtml.replace("{{pProviderTag}}",pHouseName);
+                     var pCl = pName;                     
+                     pCl=pCl.replace(/\(/g,'');pCl=pCl.replace(/\)/g,'');pCl=pCl.replace(/\'/g,'');pCl=pCl.replace(/\_/g,'');pCl=pCl.replace(/\ /g,'');pCl=pCl.replace(/\./g,'');pCl=pCl.replace(/\=/g,'');
+                     var pId = $("."+pCl).attr("value")+pHouse +pHouse_New;                     
+                     var pData = pId + "-" + pNum;
+                     var pSumID =$("."+pCl).attr("value");
+                     if($(".It" +pId).html()!='' && $(".It" +pId).html()!=undefined){
+                     	   var NewNum = $(".It" +pId+" .NumBox").html();                     	   
+                     	   NewNum = parseInt(NewNum) + parseInt(pNum);
+                     	   var pCount = 0;
+                     	   $( ".Cls"+pSumID +" .NumBox").each(function( index ) {    
+                     	   	        var oNum =$(this).html();                     	   	        
+                     	   	        pCount += parseInt(oNum);                     	   	
+                     	    });
+                     	   pCount += parseInt(pNum);
+                     	   var UndevCode = pId.substring(0,10);	        
+                     	   if($(".Undev"+UndevCode).val()==''||$(".Undev"+UndevCode).val()==undefined){
+                    	      alert('選取貨倉查無無庫存資料');	
+                    	       return;
+                    	    }                	   
+                     	   if(parseInt(pCount) > parseInt($(".Undev"+UndevCode).val())){
+                     	   	   alert('輸入數量大於目前庫存總數量!!');                     	   	   
+                     	   }else{                     	     
+                     	     $(".It" +pId+" .NumBox").html(NewNum);
+                     	     $(".It" +pId).attr("pData",pId+"-"+NewNum);
+                     	   }                     	   
+                     }else{         
+                     	    var pCount = 0;
+                     	   $( ".Cls"+pSumID +" .NumBox").each(function( index ) {    
+                     	   	        var oNum =$(this).html();                     	   	        
+                     	   	        pCount += parseInt(oNum);                     	   	
+                     	    });
+                     	   pCount += parseInt(pNum);
+                     	   
+                     	   var UndevCode = pId.substring(0,10);	    
+                     	   if($(".Undev"+UndevCode).val()==''||$(".Undev"+UndevCode).val()==undefined){
+                    	      alert('選取貨倉查無無庫存資料');	
+                    	       return;
+                    	    }
+                     	   if(parseInt(pCount) > parseInt($(".Undev"+UndevCode).val())){
+                     	   	   alert('輸入數量大於目前庫存總數量!!');                     	   	   
+                     	   }else{            
+                            pHtml = pHtml.replace(/\{{cls}}/g,pId);                                                                      
+                            pHtml = pHtml.replace("{{pId}}",pData);                                          
+                            pHtml = pHtml.replace("{{Sum}}",pSumID); 
+                            $("#ShowBox").append(pHtml);                                                                                
+                            $(".BtnMa").unbind(); 
+                            $(".BtnMa").click(function() {      	     	
+                               $(this).parent().remove();
+                            });
+                         }
+                     }
+                      $("#RtnMsg").html('');
+                 }
+             }); 
+               $("#DelChBtn").click(function() {  
+               	   $("#ShowBox").html("");  
+              });   	
+             
+             $("#AjaxFace").Hy_Validate({
+                  	  id:"#AjaxFace",
+                     Column_Require:"NumTxt,A61I13JJA12I02,A61I13JJA12I02_New",
+                     Column_Numeric:"NumTxt"
+            });  
+            
+            
+             $( "#A61I13JJA12I02" ).change(function() {    
+            	   LoaOrderList();
+            	   $("#ShowBox").html(""); 
+            });
+            
+      </script>        
+

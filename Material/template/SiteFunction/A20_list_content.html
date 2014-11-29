@@ -1,0 +1,76 @@
+<style>	 
+
+</style>
+<div class="widget-box">
+	<div class="widget-header">
+		<h4>功能鍵</h4>
+		<button id="AddBtn" class="btn-info HYBtn hidden-480" type="button"><i class="icon-book  icon-only"></i><br>新增</button>
+		<button class="btn-warning HYBtn hidden-480 UpdBtn" type="button"><i class="icon-edit icon-only"></i><br>編輯</button>
+		<button class="btn-danger HYBtn hidden-480 DelBtn" type="button"><i class="icon-trash  icon-only"></i><br>刪除</button>
+		<button class="btn-success HYBtn hidden-480" type="button" style="display:none;"><i class="icon-cloud  icon-only"></i><br>上傳</button>		
+	</div>
+
+ 
+</div>
+  
+  
+  <div class="page-header">
+			<h4 class="pink">
+					<i class="icon-hand-right icon-animated-hand-pointer blue"></i>
+					<a href="#modal-table" role="button" class="green" data-toggle="modal"> 人員管理 </a>
+				</h4>
+  </div>
+   <div class="bs-example">   	   
+   	   <div id="AjaxList"></div>        	   	      
+   </div>
+   <div id="AjaxDialog" title="Basic dialog"></div>
+   
+   
+    <script  type="text/javascript">
+      
+      function LoadAjaxList(){
+        $("#AjaxList").Hy_Template_Engine({
+            TemplateType: "List",
+            PageNum: 15,         
+            TemplateUrl: ThisWebUrl +  "/template/templateEngine/A20_list_content.html",
+            JsonDataUrl: ThisWebUrl +  "/action/templateEngine/A20_list_content_list.ashx",
+            ColumeName_Input: "A20I01XA,A20I02UV0010,A20I03CV0001,A20I05CV0001,A20I06CV0001,A20I07CV0001,A20I08CV0001,A20I09JJA13I02,A20I10JJA12I02,A20I11JJA11I02,A20I12JJA10I02,A20I13JJA02I02,A20I14JJA03I02,A20F01NV0006,A20F02NV0006,A20F03NV0008,A20F04CV0004,A20F05CV0004,A20F06CV0032,A20F07CV0032,A20F08CV0128,A20F09NT,A20IND,A20INT,A20INA,A02F01NV0016,A03F01NV0016,A12F01NV0064,A13F01NV0064,A20I03CV0001_NAME,A20I05CV0001_NAME,A20I06CV0001_NAME,A20I07CV0001_NAME,A20I08CV0001_NAME",
+            ColumeName_Radio: "",
+            ColumeName_Select: "",
+            ColumeName_Parame: "Language",
+            SearchColume: "SearchTxt"
+        });    
+     }
+     LoadAjaxList();
+   </script>	  
+   
+    <script type="text/javascript">  	           	         	         
+             $("#AddBtn").click(function () {  
+             	       $( "#AjaxDialog" ).html("");                  	       
+             	       $("span.ui-dialog-title").text('新增作業');           	             	             	       
+             	       ajaxTagFunction(ThisWebUrl + '/Module/A20/face.ashx','AjaxDialog',1,0);               	                    	                   	       
+             	       $( "#AjaxDialog" ).dialog( "open" );                 
+             });             
+             
+             
+           $( "#AjaxDialog" ).dialog({
+           	  autoOpen: false,
+              resizable: false,
+              height: 600,
+      	      width: 670,
+              modal: false,
+              buttons: {
+                "送出": function() {
+                	  /* 表單驗証 */
+                    if(Hy_FormValidate()==true){                           	                      	             
+                        	             ajaxTagSubmit(ThisWebUrl + '/Module/A20/face.ashx',"AjaxFace",1);
+                        	             LoadAjaxList();
+                        	          }
+                },
+                "關閉": function() {
+                  $( this ).dialog( "close" );
+                }
+              }
+            });
+                                      
+      </script>        

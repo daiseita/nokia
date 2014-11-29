@@ -1,0 +1,44 @@
+<style>
+  #OrderTable th{
+  	 background-color:#87b87f;
+  	 color:#fff;
+  	 font-size:15px;
+  }
+</style>
+<div class="" style="padding-right:10px;">
+   <table id="OrderTable" style="font-size:13px;" class="table table-striped">	
+   	  <tr style="background-color:#ff0000;">
+   	  	 <th></th>
+         <th>品項名稱</th>	      	         
+         <th>未出貨</th>	      	
+         <th>已出貨</th>	      	
+         <th>總數量</th>	      	
+      </tr>
+   	  <!-- BEGIN List1 -->   
+      <tr>
+      	 <td>#{{serial}}</td>	      	
+         <td>{{A31F01NV0064}}</td>	      	
+         <td class="Alarm" num="{{UnDev}}" save="{{A31I15FD0600}}">{{UnDev}}  <input type="text" name="Undev" class="Undev{{A61I04JJA31I02}}" value="{{UnDev}}" style="display:none;"> </td>
+         <td>{{Dev}}</td>
+         <td>{{Total}}</td>	      	
+      </tr>
+      <!-- END List1 -->            
+   </table>
+</div>
+
+   
+  
+  
+ <script  type="text/javascript">
+ 	
+ 	
+  $( ".Alarm" ).each(function( index ) {
+  	  var Num = $(this).attr("num");  	
+  	  var Nsave = $(this).attr("save");  	  	  
+  	  if(parseInt(Num)<parseInt(Nsave) && Nsave!="0" ){
+  	  	$( this).css("color","#ff0000");
+  	  }      
+  });
+                                 
+ </script>        
+   

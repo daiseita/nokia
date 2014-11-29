@@ -1,0 +1,110 @@
+<style>	 
+
+</style>
+
+  
+  <div class="page-header">
+			<h4 class="pink">
+					<i class="icon-hand-right icon-animated-hand-pointer blue"></i>
+					<a href="#modal-table" role="button" class="green" data-toggle="modal"> 出貨數量異常  </a>
+		  </h4>
+  </div>
+   <div class="bs-example">   	   
+   	   <div id="AjaxList"></div>        	   	      
+   </div>
+   <div id="AjaxDialog" title="Basic dialog"></div>
+   <div id="AjaxDialog2" title="數量增加"></div>
+   <div id="AjaxDialog3" title="數量減少"></div>
+   <div id="TagAjax"></div>  
+   
+   
+    <script  type="text/javascript">
+      
+      function LoadAjaxList(){
+        $("#AjaxList").Hy_Template_Engine({
+            TemplateType: "List",
+            PageNum: 15,         
+            TemplateUrl: ThisWebUrl +  "/template/templateEngine/A608L_list_content.html",
+            JsonDataUrl: ThisWebUrl +  "/action/templateEngine/A608L_list_content_list.ashx",
+            ColumeName_Input: "A74I01XA,A74I02JJA67I02,A74I03JJA12I02,A74I04JJA31I02,A74F01FD0400,A74F02NT,A74IND,A74INT,A74INA,A31F01NV0064,A12F01NV0064,A74D01",
+            ColumeName_Radio: "",
+            ColumeName_Select: "",
+            ColumeName_Parame: "Language",
+            SearchColume: "SearchTxt"
+        });    
+     }
+     LoadAjaxList();
+   </script>	  
+   
+    <script type="text/javascript">  	    
+    	       var ThisReloadUrl ="";
+    	       
+    	       
+    	       function goReload() {
+                 ajaxTagFunction(ThisReloadUrl,'AjaxDialog3',1,0);   
+                 alert('reload');
+             }  	         	         
+           
+             
+          
+            $( "#AjaxDialog2" ).dialog({
+           	  autoOpen: false,
+              resizable: false,
+              height: 430,
+      	      width: 530,
+              modal: false,
+              buttons: {   
+              	"送出": function() {
+                	 /* 增加 */                	                 	                     	
+                     ajaxTagSubmit(ThisWebUrl + '/action/Module/A608L/Plus.ashx',"AjaxDialog2",1);
+                },             
+                "關閉": function() {
+                     $( this ).dialog( "close" );
+                }
+              }
+            });
+             $( "#AjaxDialog3" ).dialog({
+           	  autoOpen: false,
+              resizable: false,
+              height: 500,
+      	      width: 630,
+              modal: false,
+              buttons: {    
+              	"送出": function() {
+                	 /* 減少 */                	                 	                     	
+                	  var  Idgroup = "";
+                	  
+                	  $( ".GropuCheckBox" ).each(function( index ) {
+         
+                         if($(this).prop("checked"))
+                         {
+                         	  var A68I02UV0019 = $(this).attr("A68I02UV0019");
+                         	  if(Idgroup!=""){Idgroup+=",";} 
+                            Idgroup += A68I02UV0019;                
+                         }
+                                                        	  
+                	  }); 
+                	  if(Idgroup!=""){                                              
+                       
+                          $("#TagAjax").kcwAjax(ThisWebUrl + '/action/Module/A608L/Minus.ashx?GroupID='+Idgroup,{
+                       	    Job:"LINK",
+                       	    Response: {
+	  	                      	         ToExecute: true,
+	  	                      	         ToGoal: false,
+	  	                      	         ToTrigger: false
+	  	                      },
+                       	    LocalEvents: {
+                       	    	success: function(Trigger,GoalTag,TriggerGoalTag,Response) {
+                       	    		           /* alert(Response);  */                       	    		          
+                                           
+                       	    		       }
+                       	      }
+                       	  }); 	
+                    }
+                },                     
+                "關閉": function() {
+                  $( this ).dialog( "close" );
+                }
+              }
+            });                         
+      </script>        

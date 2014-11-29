@@ -1,0 +1,88 @@
+<style>
+ .CHKTable td { padding:3px 5px;}	
+</style>
+<div style="margin-bottom:10px;">
+   <button id="PackAddBtn" class="btn btn-xs btn-info" style="font-size:13px;margin-left:10px;"  type="button">全選</button>  
+   <button id="PackClshBtn" class="btn btn-xs btn-danger" style="font-size:13px;margin-left:10px;"  type="button">取消</button>     	
+   <button id="PackIntohBtn" class="btn btn-xs btn-success " style="font-size:13px;margin-left:10px;"  type="button">加入</button>     	
+   <div>
+      
+   </div>
+</div>
+<div class="HYclearfix" id="SelectBox" style="overflow:auto;height:300px;width:520px;">
+	 <!-- BEGIN List1 -->   
+	<div class="setRCol_5 box{{PackNum}}"    style="width:250px;background-color:#87b87f;color:#fff;padding:2px;margin-bottom:3px;">
+		   <div style="display:none">出貨日:{{date}} &nbsp;承包商:{{Contractor}}  </div>
+	     <input type="checkbox" id="ID{{PackNum}}" PackN={{PackNum}} checked="checked" postConten="{{content}}" name="ChkPac" class="ChkPac" value="">
+	     箱號:{{PackNum}}
+	     {{HtmlTag}}
+	</div>
+	<!-- END List1 -->     
+
+	　　　
+</div>
+
+
+
+ <script type="text/javascript">           
+ 	     function BoxCount() {
+ 	     	
+           var Num = $("#TakenBox .ChkPac").length;
+           $("#BoxCountTag").html(Num);
+       }
+ 	
+ 	     $("#PackAddBtn").click(function() {      	     	
+                    $("#SelectBox .ChkPac").each(function() {
+                        $(this).prop("checked", true);
+                     });
+              });
+ 	      $("#PackClshBtn").click(function() {      	     	
+                    $("#SelectBox .ChkPac").each(function() {
+                        $(this).prop("checked", false);
+                     });
+              });
+ 	     $("#PackIntohBtn").click(function() {    
+ 	     	            if($("#A66I13JJA12I02").val()!="" && $("#A66D01").val()!="")
+ 	     	            { 	     	  	     	
+                       $("#SelectBox .ChkPac").each(function() {
+                          if($(this).prop('checked')==true) {
+                            	var pID = this.id;
+                            	pID = pID.replace("ID","box");
+                            	var pHtml = $("#SelectBox ."+pID).html();  
+                            	
+                            	var pCheck = $("#TakenBox ."+pID).html();  
+                             if(pCheck == undefined){
+                             	   var pContractor = $("#A66I13JJA12I02").val();
+                             	   var pDate = $("#A66D01").val();
+                             	   var pPack = pID.replace("box","");
+                             	   var pContent = pContractor +"-"+pDate+"-"+pPack;
+                             	   var pContractorName =$("#A66I13JJA12I02  :selected").text(); 
+                             	   pHtml = pHtml.replace("{{Contractor}}",pContractorName);
+                             	   pHtml = pHtml.replace("{{date}}",pDate);
+                             	   pHtml = pHtml.replace("{{content}}",pContent);
+                             	   pHtml = pHtml.replace("none","");
+                             	   pHtml = '<div class="setCol_5 '+pID+'"    style="width:270px;background-color:#6fb3e0;color:#fff;padding:2px;margin-bottom:3px;">'+ pHtml + '</div>';                             	   
+                                 $("#TakenBox").append(pHtml);
+                             }
+                             $("#TakenBox .ChkPac").unbind();
+                             $("#TakenBox .ChkPac").click(function() {      	     	
+                                   if( $(this).prop("checked") == true){                                       
+                                   }else{
+                                   	   var vID = $(this).attr("PackN");    
+                                   	   $("#TakenBox .box"+vID).remove();
+                                   	   BoxCount();
+                                   }
+                             });                             
+                          }else{
+                          	
+                          }
+                            
+                        });
+                        BoxCount();
+                   }else{
+                        alert("請先選擇承包商與出貨日期!");	
+                   }
+              });
+              
+ 	
+</script>       
