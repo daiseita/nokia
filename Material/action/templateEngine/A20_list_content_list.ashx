@@ -20,8 +20,9 @@ public class A10_list_content_list : IHttpHandler {
         Cls_SQL Sql = new Cls_SQL();
         Cls_Date oDate = new Cls_Date();
         DataTable dt = new DataTable();
-        oValue.setRequestGet("SearchTxt,PageNum,ThisPage");
+        oValue.setRequestGet("SearchTxt,PageNum,ThisPage,Sort");
         int PageNum, ThisPage;
+        string SortWhere = "";
         if (oValue.Data("PageNum") != "")
         {
             PageNum = Convert.ToInt32(oValue.Data("PageNum"));
@@ -37,7 +38,22 @@ public class A10_list_content_list : IHttpHandler {
         else
         {
             ThisPage = 1;
-        }        
+        }
+        if (oValue.Data("Sort") != "")
+        {
+            switch (oValue.Data("Sort"))
+            {
+                case "A":
+                    SortWhere = " where A20I07CV0001='V' ";
+                    break;
+                case "B":
+                    SortWhere = " where A20I08CV0001='V' ";
+                    break;
+                case "C":
+                    SortWhere = " where A20I09CV0001='V' ";    
+                    break;
+            }
+        } 
         if (oValue.Data("SearchTxt") != "")
         {
             Sql.SetWhere("or", "A12F01NV0064", "like", oValue.Data("SearchTxt"), true);
@@ -49,8 +65,8 @@ public class A10_list_content_list : IHttpHandler {
 
 
 
-        TableString = "select A20I01XA,A20I02UV0010,A20I03CV0001,A20I05CV0001,A20I06CV0001,A20I07CV0001,A20I08CV0001,A20I09JJA13I02,A20I10JJA12I02,A20I11JJA11I02,A20I12JJA10I02,A20I13JJA02I02,A20I14JJA03I02,A20F01NV0006,A20F02NV0006,A20F03NV0008,A20F04CV0004,A20F05CV0004,A20F06CV0032,A20F07CV0032,A20F08CV0128,A20F09NT,A20IND,A20INT,A20INA,A02F01NV0016,A03F01NV0016,A12F01NV0064,A13F01NV0064 from A20 left join A02 on A20I13JJA02I02 = A02I02UV0002 left join A03 on A20I14JJA03I02 = A03I02UV0003 left join A12 on A20I10JJA12I02=A12I02UV0010 left join A13 on A20I09JJA13I02 = A13I02UV0010";
-        Sql.SetColumnName("A20I01XA,A20I02UV0010,A20I03CV0001,A20I05CV0001,A20I06CV0001,A20I07CV0001,A20I08CV0001,A20I09JJA13I02,A20I10JJA12I02,A20I11JJA11I02,A20I12JJA10I02,A20I13JJA02I02,A20I14JJA03I02,A20F01NV0006,A20F02NV0006,A20F03NV0008,A20F04CV0004,A20F05CV0004,A20F06CV0032,A20F07CV0032,A20F08CV0128,A20F09NT,A20IND,A20INT,A20INA,A02F01NV0016,A03F01NV0016,A12F01NV0064,A13F01NV0064");
+        TableString = "select A20I01XA,A20I02UV0010,A20I03CV0001,A20I05CV0001,A20I06CV0001,A20I07CV0001,A20I08CV0001,A20I09JJA13I02,A20I10JJA12I02,A20I11JJA11I02,A20I12JJA10I02,A20I13JJA02I02,A20I14JJA03I02,A20F01NV0006,A20F02NV0006,A20F03NV0008,A20F04CV0004,A20F05CV0004,A20F06CV0032,A20F07CV0032,A20F08CV0128,A20F09NT,A20IND,A20INT,A20INA,A02F01NV0016,A03F01NV0016,A12F01NV0064,A13F01NV0064,A19F01NV0032 from A20 left join A02 on A20I13JJA02I02 = A02I02UV0002 left join A03 on A20I14JJA03I02 = A03I02UV0003 left join A12 on A20I10JJA12I02=A12I02UV0010 left join A13 on A20I09JJA13I02 = A13I02UV0010 left join A19 on A20I15JJA19I02 = A19I02UV0004 " + SortWhere;
+        Sql.SetColumnName("A20I01XA,A20I02UV0010,A20I03CV0001,A20I05CV0001,A20I06CV0001,A20I07CV0001,A20I08CV0001,A20I09JJA13I02,A20I10JJA12I02,A20I11JJA11I02,A20I12JJA10I02,A20I13JJA02I02,A20I14JJA03I02,A20F01NV0006,A20F02NV0006,A20F03NV0008,A20F04CV0004,A20F05CV0004,A20F06CV0032,A20F07CV0032,A20F08CV0128,A20F09NT,A20IND,A20INT,A20INA,A02F01NV0016,A03F01NV0016,A12F01NV0064,A13F01NV0064,A19F01NV0032");
         Sql.SetTableName("( " + TableString + " )A20 ");
         Sql.sqlTransferColumn = "A20I03CV0001,A20I05CV0001,A20I06CV0001,A20I07CV0001,A20I08CV0001";
         Sql.SetOrderBy("A20I02UV0010", false);
@@ -110,6 +126,20 @@ public class A10_list_content_list : IHttpHandler {
         PageInfo.DataEnd = Sql.DataEnd.ToString();
         PageInfo.ThisPage = ThisPage.ToString();
         PageInfo.PageNum = PageNum.ToString();
+
+        List<TittleSelect> select01_Tittile = new List<TittleSelect>();
+        List<ValueSelect> select01_Value = new List<ValueSelect>();
+        select01_Tittile.Add(new TittleSelect { value = "承包商聯絡人" });
+        select01_Tittile.Add(new TittleSelect { value = "貨倉聯絡人" });
+        select01_Tittile.Add(new TittleSelect { value = "客戶聯絡人" });
+        select01_Value.Add(new ValueSelect { value = "A" });
+        select01_Value.Add(new ValueSelect { value = "B" });
+        select01_Value.Add(new ValueSelect { value = "C" });
+        Select.Add(new HtmlSelect
+        {
+            tittle = select01_Tittile,
+            value = select01_Value
+        });
 
         /*  傳遞參數 */
         List<ParameArray> parameAry = new List<ParameArray>();

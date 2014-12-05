@@ -18,6 +18,9 @@ public class Info : IHttpHandler {
     Dictionary<string, string> CntData3 = new Dictionary<string, string>();
     Dictionary<string, string> CntData4 = new Dictionary<string, string>();
     string A61I07CV0001 = "";
+    string WhereA31I05 = "";
+    string WhereA61I07 = "";
+    string WhereNoA61I07 = "";
     public void ProcessRequest(HttpContext context)
     {
         
@@ -38,7 +41,25 @@ public class Info : IHttpHandler {
         
         if (A61I07CV0001 != "")
         {
-            SQL = "select A31I02UV0010,A31F01NV0064 from A31  where A31I05CV0001='" + A61I07CV0001 + "'  and A31I11JJA31I02=''  order by A31F01NV0064";
+           
+            if (A61I07CV0001 == "G") {
+               WhereA31I05 = " and A31I05CV0001='G'";
+               WhereA61I07 = " and A61I07CV0001='G'";
+               WhereNoA61I07 = " A61I07CV0001='G'";
+            }
+            else if (A61I07CV0001 == "L")
+            {
+                WhereA31I05 = " and A31I05CV0001='L'";
+                WhereA61I07 = " and A61I07CV0001='G'";
+                WhereNoA61I07 = " A61I07CV0001='L'";
+            }
+            else {
+                WhereA31I05 = ""; 
+                WhereA61I07 = "";
+                WhereNoA61I07 = "";
+            }
+
+            SQL = "select A31I02UV0010,A31F01NV0064 from A31  where  A31I11JJA31I02='' " + WhereA31I05 + " order by A31F01NV0064";
             dt = Sql.selectTable(SQL, "A31");
             oTemplate.SetTemplatesDir(pb.ActionTemplateName + "module/");
             oTemplate.SetTemplateFileCharset(pb.InfoTemplateName, "UTF-8");
@@ -52,10 +73,10 @@ public class Info : IHttpHandler {
             {
 
 
-                DtCn1 = Sql.selectTable("select COUNT(A61I11CV0001)cntA, A61I04JJA31I02 from A61 where A61I07CV0001='" + A61I07CV0001 + "'  group by A61I04JJA31I02", "CN1");
-                DtCn2 = Sql.selectTable("select COUNT(A61I11CV0001)cntA, A61I04JJA31I02 from A61 where (A61I11CV0001='' or A61I11CV0001 = 'B') and A61I07CV0001='" + A61I07CV0001 + "'   group by A61I04JJA31I02", "CN2");
-                DtCn3 = Sql.selectTable("select COUNT(A61I11CV0001)cntA, A61I04JJA31I02 from A61 where A61I11CV0001='A' and A61I07CV0001='" + A61I07CV0001 + "'  group by A61I04JJA31I02", "CN3");
-                DtCn4 = Sql.selectTable("select COUNT(A61I11CV0001)cntA, A61I04JJA31I02 from A61 where A61I11CV0001 <> '' and A61I11CV0001 <> 'A' and A61I11CV0001 <> 'B' and A61I07CV0001='" + A61I07CV0001 + "'  group by A61I04JJA31I02", "CN4");
+                DtCn1 = Sql.selectTable("select COUNT(A61I11CV0001)cntA, A61I04JJA31I02 from A61 where " + WhereNoA61I07 + "  group by A61I04JJA31I02", "CN1");
+                DtCn2 = Sql.selectTable("select COUNT(A61I11CV0001)cntA, A61I04JJA31I02 from A61 where (A61I11CV0001='' or A61I11CV0001 = 'B')  " + WhereA61I07 + "   group by A61I04JJA31I02", "CN2");
+                DtCn3 = Sql.selectTable("select COUNT(A61I11CV0001)cntA, A61I04JJA31I02 from A61 where A61I11CV0001='A'  " + WhereA61I07 + "  group by A61I04JJA31I02", "CN3");
+                DtCn4 = Sql.selectTable("select COUNT(A61I11CV0001)cntA, A61I04JJA31I02 from A61 where A61I11CV0001 <> '' and A61I11CV0001 <> 'A' and A61I11CV0001 <> 'B'  " + WhereA61I07 + "  group by A61I04JJA31I02", "CN4");
                 if (DtCn1 != null)
                 {
                     CntData1 = DictionaryWork(DtCn1);
@@ -145,7 +166,7 @@ public class Info : IHttpHandler {
         ds1.Tables.Add(dt);
         for (int i = 0; i < contractor.Rows.Count; i++)
         {
-            countDt = Sql.selectTable("select COUNT(A61I11CV0001)cntA, A61I04JJA31I02,A61I13JJA12I02 from A61 where A61I11CV0001 <> '' and A61I11CV0001 <> 'A' and A61I11CV0001 <> 'B' and A61I07CV0001='" + A61I07CV0001 + "'  group by A61I04JJA31I02,A61I13JJA12I02", "serch");
+            countDt = Sql.selectTable("select COUNT(A61I11CV0001)cntA, A61I04JJA31I02,A61I13JJA12I02 from A61 where A61I11CV0001 <> '' and A61I11CV0001 <> 'A' and A61I11CV0001 <> 'B'  " + WhereA61I07 + "  group by A61I04JJA31I02,A61I13JJA12I02", "serch");
             if (countDt != null)
             {
                 for (int j = 0; j < countDt.Rows.Count; j++)

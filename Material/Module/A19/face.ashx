@@ -20,13 +20,13 @@ public class A19_face : IHttpHandler {
     public void ProcessRequest(HttpContext context)
     {
         Language_TF TF = new Language_TF();
-        oValue.setRequestPost("Action,A19I01XA,A19I02UV0004,A19I03CV0001,A19F01NV0032,A19F02NV0256");
+        oValue.setRequestPost("Action,A19I01XA,A19I02UV0004,A19I03CV0001,A19F01NV0032,A19F02NV0256,A19F03NV0256");
         oValue.setRequestGet("Del");
         string A19I01XA = oValue.Data("A19I01XA").ToString();
         if (A19I01XA == "") { oValue.setRequestGet("A19I01XA"); A19I01XA = oValue.Data("A19I01XA"); }
 
         string A19I06CV0009 = "";
-        SQL = "Select A19I01XA,A19I02UV0004,A19I03CV0001,A19F01NV0032,A19F02NV0256,A19IND,A19INT,A19INA,A19INU,A19UPD,A19UPT,A19UPA,A19UPU,A19UPC from A19 where A19I01XA='" + oValue.Data("A19I01XA") + "'";
+        SQL = "Select A19I01XA,A19I02UV0004,A19I03CV0001,A19F01NV0032,A19F02NV0256,A19F03NV0256,A19IND,A19INT,A19INA,A19INU,A19UPD,A19UPT,A19UPA,A19UPU,A19UPC from A19 where A19I01XA='" + oValue.Data("A19I01XA") + "'";
         recordset = Sql.selectTable(SQL, "A19");
         /* 新增編輯邏輯 */
         if (oValue.Data("Action") == "Add" || oValue.Data("Action") == "Upd") { InsertUpdate(context); return; }
@@ -59,7 +59,7 @@ public class A19_face : IHttpHandler {
             //新增
             try
             {
-                string columnString = "A19I01XA,A19I02UV0004,A19I03CV0001,A19F01NV0032,A19F02NV0256";
+                string columnString = "A19I01XA,A19I02UV0004,A19I03CV0001,A19F01NV0032,A19F02NV0256,A19F03NV0256";
                 string[] Column = columnString.Split(',');
                 for (int i = 0; i < Column.Length ; i++)
                 {
@@ -184,7 +184,7 @@ public class A19_face : IHttpHandler {
         string A19I03CV0001 = oValue.Data("A19I03CV0001");
         string A19F01NV0032 = oValue.Data("A19F01NV0032");
         string A19F02NV0256 = oValue.Data("A19F02NV0256");
-       
+        string A19F03NV0256 = oValue.Data("A19F03NV0256");
 
         string strSQL = "";
         string Error = "";
@@ -192,7 +192,8 @@ public class A19_face : IHttpHandler {
         Sql.SetData("A19I02UV0004", A19I02UV0004);        
         Sql.SetData("A19I03CV0001", A19I03CV0001);
         Sql.SetNData("A19F01NV0032", A19F01NV0032);
-        Sql.SetData("A19F02NV0256", A19F02NV0256);       
+        Sql.SetData("A19F02NV0256", A19F02NV0256);
+        Sql.SetData("A19F03NV0256", A19F03NV0256);    
         Sql.SetData("A19IND", oDate.IND);
         Sql.SetData("A19INT", oDate.INT);
         Sql.SetData("A19INA", oDate.INA);

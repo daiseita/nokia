@@ -28,9 +28,10 @@
                   <input class="ace A20I07CV0001 chk" type="checkbox"    value="V" name="A20I07CV0001"><span class="lbl"> 承包商聯絡人</span>
                 </label> <span class="A20I10JJA12I02Hidden" style="margin-left:30px;display:none;">{{A20I10JJA12I02.HTML_SELECT}}  <span class="MarkStar">*</span></span>
                 <br>
-                <label style="display:none;">
-                  <input class="ace chk" type="checkbox" value="V"   name="A20I08CV0001"><span class="lbl"> 系統管理者</span>
+                <label >
+                  <input class="ace chk A20I08CV0001" type="checkbox" value="V"   name="A20I08CV0001"><span class="lbl"> 貨倉聯絡人</span>
                 </label>
+                <span class="A20I15JJA19I02Hidden" style="margin-left:37px;display:none;">{{A20I15JJA19I02.HTML_SELECT}}  <span class="MarkStar">*</span></span>
           </td>
         </tr>       
         <tr>
@@ -67,6 +68,13 @@
                        $(".A20I10JJA12I02Hidden").show();
                     }else{
                     	 $(".A20I10JJA12I02Hidden").hide();
+                    }
+             });
+             $( ".A20I08CV0001" ).click(function() {                 	   	
+                    if($(this).prop('checked')==true) {
+                       $(".A20I15JJA19I02Hidden").show();
+                    }else{
+                    	 $(".A20I15JJA19I02Hidden").hide();
                     }
              });
       	     var oSelect = new hy_SelectHtml();

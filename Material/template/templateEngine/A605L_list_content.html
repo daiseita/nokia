@@ -3,7 +3,8 @@
            <thead>
                <tr>
                    <th></th>
-                   <th><h5>入料編碼 </h5> </th>                   
+                   <th><h5>入料編碼 </h5> </th>          
+                   <th><h5>內容</h5> </th>                     
                    <th><h5>入料時間 </h5> </th>                                      
                </tr>
            </thead>
@@ -12,8 +13,13 @@
                 <tr class=""  A68I03JJA67I02="{{A68I03JJA67I02}}">
                    <td>{{Serial}}            </td>                   
                    <td>{{A68I03JJA67I02}} </td>
+                   <td>  <span id="InfoS{{A68I03JJA67I02}}" style="padding:0px;"></span>   </td>           
                    <td>{{A68INA}}   </td>                   
                </tr>
+                <script  type="text/javascript">               
+                	 
+               	    ajaxTagFunction( ThisWebUrl +  '/action/Module/A605L/Info_S.ashx?A67I02UV0012={{A68I03JJA67I02}}&A12I02UV0010=','InfoS{{A68I03JJA67I02}}',1,0);  
+               </script>	  
                 <!-- END List1 -->               
            </tbody>           
        </table>      
@@ -58,7 +64,9 @@
     	       	  A12I02UV0010 = $("#A12I02UV0010").val();    	       	  
     	       	  if(A12I02UV0010!="" &&A12I02UV0010!=undefined){
     	       	  	A12I02UV0010 = "&A12I02UV0010=" + A12I02UV0010;
+    	       	  	alert(A12I02UV0010);
     	       	  }
+    	       	  
     	          ajaxTagFunction( ThisWebUrl +  '/action/Module/A605L/Info.ashx?A67I02UV0012='+A68I03JJA67I02+A12I02UV0010,'AjaxDialog2',1,0);  
     	          $( "#AjaxDialog2" ).dialog( "open" );  
     	       }else{alert("請先選取資料!!");}               
