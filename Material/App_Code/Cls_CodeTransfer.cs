@@ -31,7 +31,7 @@ public class Cls_CodeTransfer
         ImportData("A20I06CV0001", "", "");
         ImportData("A20I07CV0001", "V", "包商聯絡人");
         ImportData("A20I07CV0001", "", "");
-        ImportData("A20I08CV0001", "V", "貨倉聯絡人");
+        ImportData("A20I08CV0001", "V", "系統管理者");
         ImportData("A20I08CV0001", "", "");
         ImportData("A30I03CV0001", "B", "啟用");
         ImportData("A30I03CV0001", "S", "停用");

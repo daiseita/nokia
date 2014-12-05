@@ -201,19 +201,19 @@
 										出料作業
 									</a>
 								</li>
-                                <li >
+                                <li style="display:none;">
 									<a href="<%= ResolveUrl("~/SiteFunction/A608L.aspx") %>">
 										<i class="icon-double-angle-right"></i>
 										到貨數量異常處理
 									</a>
 								</li>
-                                <li >
+                                <li style="display:none;">
 									<a href="<%= ResolveUrl("~/SiteFunction/A606G.aspx") %>">
 										<i class="icon-double-angle-right"></i>
 										貨倉調播作業
 									</a>
 								</li>    
-                                <li >
+                                <li style="display:none;">
 									<a href="<%= ResolveUrl("~/SiteFunction/A607CG.aspx") %>">
 										<i class="icon-double-angle-right"></i>
 										承包商調播確認

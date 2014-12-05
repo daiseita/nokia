@@ -14,12 +14,12 @@
                 <!-- BEGIN List1 -->
                 <tr class="" A20I01XA="{{A20I01XA}}">
                    <td>{{Serial}}            </td>
-                   <td>{{A20F01NV0006}}    </td>
+                   <td>{{A20F01NV0006}} -{{A20I03CV0001_NAME}}      </td>
                    <td> 
                    	       <div>{{A20I05CV0001_NAME}}                    </div>
                    	       <div>{{A13F01NV0064}}  {{A20I06CV0001_NAME}} </div>
                    	       <div>{{A12F01NV0064}}  {{A20I07CV0001_NAME}} </div>
-                   	       <div>{{A19F01NV0032}}  {{A20I08CV0001_NAME}}                    </div>
+                   	       <div>{{A20I08CV0001_NAME}}                    </div>
                    </td>
                    <td> {{A02F01NV0016}}{{A03F01NV0016}} {{A20F08CV0128}}  </td>      
                    <td>室話 {{A20F06CV0032}}  手機  {{A20F07CV0032}}</td>    
@@ -38,8 +38,7 @@
            	        &nbsp;&nbsp;<input type="text" id="JsTem-ThisPageInput" style="width:40px;text-align:center;" class="PageBtn SubmitDisable" name="PageBtn" value=""><span id="JsTem-ThisPageTag" style="display:none;"></span>  /  <span id="JsTem-PageCountTag"></span>  頁&nbsp;&nbsp;
            </span>
            <button type="button" class="btn btn-info btn-xs" onclick="Hy_Template_Engine_PageMove_Request('Next')">下一頁</button>
-           <button type="button" class="btn btn-info btn-xs" onclick="Hy_Template_Engine_PageMove_Request('Last')">最末頁</button>&nbsp;
-           分類&nbsp&nbsp;&nbsp;{{Sort.HTML_SELECT}}
+           <button type="button" class="btn btn-info btn-xs" onclick="Hy_Template_Engine_PageMove_Request('Last')">最末頁</button>&nbsp;&nbsp&nbsp;&nbsp                      
            <input id="SearchTxt" class="SubmitDisable hidden-720" type="text" placeholder="Search">
            <button type="button" class="btn btn-success btn-xs hidden-720" onclick="Hy_Template_Engine_Reload_JData();">搜&nbsp;&nbsp;尋</button>
        </div>

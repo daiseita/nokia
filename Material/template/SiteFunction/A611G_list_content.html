@@ -5,9 +5,7 @@
 	<div class="widget-header">
 		<h4>功能鍵</h4>		
 		<button id="ExportBtn" class="btn-success HYBtn hidden-480 ExportBtn" type="button" ><i class="icon-cloud  icon-only"></i><br>匯出</button>		
-		<input  type="radio" class="Sort" name="Sort" value="A">  全部
-		<input  type="radio" class="Sort" name="Sort" value="L" >  Local
-		<input  type="radio" class="Sort" name="Sort" value="G" checked=checked>  Global
+		
 	</div> 
 </div>
   
@@ -28,22 +26,8 @@
     <script  type="text/javascript">
     	var ThisHtml="";
     	
-      var pHtml ='<div style="width:100%;text-align:center;padding-top:80px;">' +
-                        '<img src="'+ThisWebUrl+'/assets/images/loadering.gif" alt="Smiley face" height="120" width="120">' +
-                        '<div style="font-size:16px;">系統處理中....請稍候!!</div>' +
-                        '</div>';
-    	          $( "#AjaxList" ).html(pHtml);   
       ajaxTagFunction(ThisWebUrl + '/Action/Module/A611L/Info.ashx?A61I07CV0001=G','AjaxList',1,0);   
       
-      $(".Sort").change(function () {  
-       	   var pHtml ='<div style="width:100%;text-align:center;padding-top:80px;">' +
-                        '<img src="'+ThisWebUrl+'/assets/images/loadering.gif" alt="Smiley face" height="120" width="120">' +
-                        '<div style="font-size:16px;">系統處理中....請稍候!!</div>' +
-                        '</div>';
-    	          $( "#AjaxList" ).html(pHtml);   
-       	    var Sort = this.value;
-       	    ajaxTagFunction(ThisWebUrl + '/Action/Module/A611L/Info.ashx?A61I07CV0001='+Sort,'AjaxList',1,0);   
-      });
       
       function setHtmlTable() {
            ThisHtml = $( "#ReportTable" ).html();

@@ -20,13 +20,13 @@ public class A20_face : IHttpHandler {
     public void ProcessRequest(HttpContext context)
     {
         Language_TF TF = new Language_TF();
-        oValue.setRequestPost("Action,A20I01XA,A20I02UV0010,A20I03CV0001,A20I05CV0001,A20I06CV0001,A20I07CV0001,A20I08CV0001,A20I09JJA13I02,A20I10JJA12I02,A20I11JJA11I02,A20I12JJA10I02,A20I13JJA02I02,A20I14JJA03I02,A20I15JJA19I02,A20F01NV0006,A20F02NV0006,A20F03NV0008,A20F04CV0004,A20F05CV0004,A20F06CV0032,A20F07CV0032,A20F08CV0128,A20F09NT");
+        oValue.setRequestPost("Action,A20I01XA,A20I02UV0010,A20I03CV0001,A20I05CV0001,A20I06CV0001,A20I07CV0001,A20I08CV0001,A20I09JJA13I02,A20I10JJA12I02,A20I11JJA11I02,A20I12JJA10I02,A20I13JJA02I02,A20I14JJA03I02,A20F01NV0006,A20F02NV0006,A20F03NV0008,A20F04CV0004,A20F05CV0004,A20F06CV0032,A20F07CV0032,A20F08CV0128,A20F09NT");
         oValue.setRequestGet("Del");
         string A20I01XA = oValue.Data("A20I01XA").ToString();
         if (A20I01XA == "") { oValue.setRequestGet("A20I01XA"); A20I01XA = oValue.Data("A20I01XA"); }
 
         string A20I06CV0009 = "";
-        SQL = "Select A20I01XA,A20I02UV0010,A20I03CV0001,A20I05CV0001,A20I06CV0001,A20I07CV0001,A20I08CV0001,A20I09JJA13I02,A20I10JJA12I02,A20I11JJA11I02,A20I12JJA10I02,A20I13JJA02I02,A20I14JJA03I02,A20I15JJA19I02,A20F01NV0006,A20F02NV0006,A20F03NV0008,A20F04CV0004,A20F05CV0004,A20F06CV0032,A20F07CV0032,A20F08CV0128,A20F09NT,A20IND,A20INT,A20INA,A20INU,A20UPD,A20UPT,A20UPA,A20UPU,A20UPC from A20 where A20I01XA='" + oValue.Data("A20I01XA") + "'";
+        SQL = "Select A20I01XA,A20I02UV0010,A20I03CV0001,A20I05CV0001,A20I06CV0001,A20I07CV0001,A20I08CV0001,A20I09JJA13I02,A20I10JJA12I02,A20I11JJA11I02,A20I12JJA10I02,A20I13JJA02I02,A20I14JJA03I02,A20F01NV0006,A20F02NV0006,A20F03NV0008,A20F04CV0004,A20F05CV0004,A20F06CV0032,A20F07CV0032,A20F08CV0128,A20F09NT,A20IND,A20INT,A20INA,A20INU,A20UPD,A20UPT,A20UPA,A20UPU,A20UPC from A20 where A20I01XA='" + oValue.Data("A20I01XA") + "'";
         recordset = Sql.selectTable(SQL, "A20");
         /* 新增編輯邏輯 */
         if (oValue.Data("Action") == "Add" || oValue.Data("Action") == "Upd") { InsertUpdate(context); return; }
@@ -38,7 +38,7 @@ public class A20_face : IHttpHandler {
         string A20I13JJA02I02 = "";
         string A20I09JJA13I02 = "";
         string A20I10JJA12I02 = "";
-        string A20I15JJA19I02 = "";
+        
         if (recordset != null)
         {
             //編輯
@@ -57,7 +57,6 @@ public class A20_face : IHttpHandler {
             A20I13JJA02I02 = recordset.Rows[0]["A20I13JJA02I02"].ToString();
             A20I09JJA13I02 = recordset.Rows[0]["A20I09JJA13I02"].ToString();
             A20I10JJA12I02 = recordset.Rows[0]["A20I10JJA12I02"].ToString();
-            A20I15JJA19I02 = recordset.Rows[0]["A20I15JJA19I02"].ToString();
             oTemplate.SetVariable("Action", "Upd");
 
             recordset.Dispose();
@@ -119,17 +118,6 @@ public class A20_face : IHttpHandler {
             }
         }
         oTemplate.SetVariable_HTML_SELECT("A20I10JJA12I02");
-        select = null;
-        SQL = "Select A19I02UV0004,A19F01NV0032 From A19 ";
-        select = Sql.selectTable(SQL, "A19");
-        if (select != null)
-        {
-            for (int i = 0; i < select.Rows.Count; i++)
-            {
-                oTemplate.SetVariable_HTML_OPTION("A20I15JJA19I02", select.Rows[i][1].ToString(), A20I15JJA19I02, select.Rows[i][0].ToString());
-            }
-        }
-        oTemplate.SetVariable_HTML_SELECT("A20I15JJA19I02");
         
         
         string Rtn = oTemplate.GetOutput();
@@ -155,11 +143,6 @@ public class A20_face : IHttpHandler {
             return;
         }
         if (oValue.Data("A20I07CV0001") == "V" && oValue.EmptyCheck("A20I10JJA12I02") == false)
-        {
-            context.Response.Write("RtnMsg('RtnMsg','" + Ms.Msg01 + "');");
-            return;
-        }
-        if (oValue.Data("A20I08CV0001") == "V" && oValue.EmptyCheck("A20I15JJA19I02") == false)
         {
             context.Response.Write("RtnMsg('RtnMsg','" + Ms.Msg01 + "');");
             return;
@@ -257,10 +240,10 @@ public class A20_face : IHttpHandler {
         string A20F07CV0032 = oValue.Data("A20F07CV0032");
         string A20F08CV0128 = oValue.Data("A20F08CV0128");
         string A20F09NT = oValue.Data("A20F09NT");
-        string A20I15JJA19I02 = oValue.Data("A20I15JJA19I02");
+
         if (A20I06CV0001 == "") { A20I09JJA13I02 = ""; }
         if (A20I07CV0001 == "") { A20I10JJA12I02 = ""; }
-        if (A20I08CV0001 == "") { A20I15JJA19I02 = ""; }
+        
         string strSQL = "";
         string Error = "";
         //Sql.transBegin();
@@ -276,7 +259,6 @@ public class A20_face : IHttpHandler {
         Sql.SetData("A20I12JJA10I02", A20I12JJA10I02);
         Sql.SetData("A20I13JJA02I02", A20I13JJA02I02);
         Sql.SetData("A20I14JJA03I02", A20I14JJA03I02);
-        Sql.SetData("A20I15JJA19I02", A20I15JJA19I02);
         Sql.SetData("A20F01NV0006", A20F01NV0006);
         Sql.SetData("A20F02NV0006", A20F02NV0006);
         Sql.SetData("A20F03NV0008", A20F03NV0008);

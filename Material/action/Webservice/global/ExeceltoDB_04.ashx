@@ -180,27 +180,21 @@ public class ExeceltoDB_01 : IHttpHandler {
 
         //資料筆數x數量
         int intCount = mergeDt.Rows.Count;
-        try
+
+        for (int a = 0; a < intCount; a++)
         {
-            for (int a = 0; a < intCount; a++)
+            if (Convert.ToInt32(mergeDt.Rows[a][6]) > 1)
             {
-                if (Convert.ToInt32(mergeDt.Rows[a][6]) > 1)
+                for (int p = 0; p < (Convert.ToInt32(mergeDt.Rows[a][6]) - 1); p++)
                 {
-                    for (int p = 0; p < (Convert.ToInt32(mergeDt.Rows[a][6]) - 1); p++)
+                    DataRow dr = mergeDt.NewRow();
+                    for (int j = 0; j < 25; j++)
                     {
-                        DataRow dr = mergeDt.NewRow();
-                        for (int j = 0; j < 25; j++)
-                        {
-                            dr[j] = mergeDt.Rows[a][j].ToString();
-                        }
-                        mergeDt.Rows.Add(dr);
+                        dr[j] = mergeDt.Rows[a][j].ToString();
                     }
+                    mergeDt.Rows.Add(dr);
                 }
             }
-        }
-        catch {
-            ErrorMsg += "上傳格式錯誤!--1";
-            return "";
         }
         
         /* 在庫餘數 */
